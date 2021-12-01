@@ -1,0 +1,75 @@
+.main__login-registrierung {
+  padding: 80px;
+  text-align: center;
+  background-image: url(images/login-reg-background.jpg);
+  background-repeat: no-repeat;
+  background-size: cover;
+  display: flex;
+  justify-content: space-around;
+}
+
+.main__login-registrierung__cards {
+  background-color: #dcf4ff;
+  padding: 60px;
+  text-align: center;
+  border-radius: 15px;
+  width: 35%;
+}
+
+.main__login-registrierung__cards h2 {
+  font-family: "Assistant-Regular", sans-serif;
+  font-weight: 700;
+  font-size: 26px;
+  text-transform: uppercase;
+}
+
+.form {
+  display: flex;
+  flex-direction: column;
+}
+
+.main__login-registrierung__cards input[type="text"],
+input[type="password"] {
+  border: 1px solid #535353;
+  border-radius: 5px;
+  background-color: #fff;
+  color: #535353;
+  padding: 5px;
+  margin: 8px 0;
+}
+
+.signin-bttn {
+  background-color: #ffc4ac;
+  border: none;
+  border-radius: 5px;
+  padding: 6px;
+  margin: 8px 0;
+  text-transform: uppercase;
+  font-size: 16px;
+  font-family: "Assistant-Regular", sans-serif;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.forgot-pass {
+  text-decoration: underline;
+  color: #000;
+}
+
+.main__login-registrierung__cards p {
+  padding: 10px 0 20px;
+}
+
+.register-link {
+  background-color: #ffc4ac;
+  border: none;
+  border-radius: 5px;
+  padding: 6px;
+  text-transform: uppercase;
+  font-size: 16px;
+  font-family: "Assistant-Regular", sans-serif;
+  font-weight: 700;
+  color: #000;
+  cursor: pointer;
+  width: 100%;
+}

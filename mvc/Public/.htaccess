@@ -1,0 +1,9 @@
+# mod_rewrite aktivieren
+RewriteEngine On
+# Rewriting nur dann durchführen, wenn keine Datei an der aufgerufenen URL existiert
+RewriteCond %{REQUEST_FILENAME} !-f
+# Rewriting nur dann durchführen, wenn kein Ordner an der aufgerufenen URL existiert
+RewriteCond %{REQUEST_FILENAME} !-d
+# Gesamten Pfad, beginnend am Verzeichnis, in dem diese .htacces Datei gespeichert ist, als Parameter an die index.php
+#   Datei anähngen.
+RewriteRule ^(.*)$ index.php?path=$1 [L,QSA]

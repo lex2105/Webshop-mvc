@@ -1,0 +1,272 @@
+/* ####### FONTS ###### */
+@font-face {
+  font-family: "Assistant-Bold";
+  src: url("../../Resources/fonts/Assistant-Bold.ttf");
+}
+
+@font-face {
+  font-family: "Assistant-Regular";
+  src: url("../../Resources/fonts/Assistant-Regular.ttf");
+}
+
+@font-face {
+  font-family: "Bodoni-MT-Black";
+  src: url("../../Resources/fonts/BodoniMTblack.ttf");
+}
+
+@font-face {
+  font-family: "ArterioNonCommercial";
+  src: url("../../Resources/fonts/ArterioNonCommercial.otf");
+}
+
+/* ######## GENERAL ####### */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+p {
+  font-size: 14px;
+  font-family: "Assistant-Regular", sans-serif;
+}
+
+/* ########################################## HEADER ####################################### */
+.header {
+  background-color: #dcf4ff;
+}
+
+.logo {
+  font-family: Arial, Helvetica, sans-serif;
+  text-transform: uppercase;
+  font-weight: 300;
+}
+
+.header__one {
+  display: flex;
+  justify-content: space-between;
+  padding: 14px 80px;
+}
+
+.search {
+  width: 600px;
+  border: 1px solid #535353;
+  color: #535353;
+  font-size: 16px;
+  padding: 5px;
+}
+
+.header__one__right {
+  display: flex;
+}
+
+.header__one__link {
+  padding-left: 20px;
+}
+
+.header__one__link a {
+  font-family: "Assistant-Regular", sans-serif;
+  font-size: 16px;
+  color: #000;
+  text-decoration: none;
+}
+
+nav {
+  display: flex;
+  justify-content: space-around;
+  padding: 14px 350px;
+}
+
+nav a {
+  font-family: "Assistant-Bold", sans-serif;
+  font-size: 16px;
+  color: #000;
+  text-transform: uppercase;
+  text-decoration: none;
+}
+
+nav a:hover {
+  text-decoration: underline;
+}
+
+/* ########################################## MAIN ############# */
+.main {
+  padding: 40px 80px;
+}
+
+.main__background {
+  background-image: url("../../Resources/images/main-action.jpg");
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
+.main__action {
+  padding: 300px 0;
+  width: 230px;
+  background-color: #ffc4ac;
+  text-align: center;
+}
+
+.main__action h2 {
+  font-family: "Assistant-Bold";
+}
+
+.main__action p {
+  font-size: 16px;
+}
+
+.shop-bttn {
+  border: 1px solid #dcf4ff;
+  border-radius: 5px;
+  background-color: #ffc4ac;
+  text-transform: uppercase;
+  font-size: 16px;
+  font-family: "Assistant-Regular", sans-serif;
+  font-weight: 500;
+  padding: 5px 25px;
+}
+
+.main__bestsellers {
+  padding: 80px;
+  text-align: center;
+  background-image: url("../../Resources/images/bestsellers-background.jpg");
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
+.main__bestsellers h1 {
+  font-family: "Bodoni-MT-Black", serif;
+  font-size: 28px;
+  text-transform: uppercase;
+}
+
+.main__cards {
+  display: flex;
+  justify-content: space-between;
+  padding-top: 30px;
+}
+
+.card p {
+  font-family: "ArterioNonCommercial", serif;
+  font-size: 16px;
+  text-align: center;
+}
+
+.card_name {
+  padding-top: 15px;
+}
+
+.basket-bttn {
+  border-radius: 5px;
+  border: none;
+  padding: 8px 20px;
+  margin-top: 10px;
+  background-color: #ffc4ac;
+  font-size: 14px;
+}
+
+/* ####################################### FOOTER ################################# */
+.footer__newsletter {
+  padding: 30px 80px;
+  background-image: url("../../Resources/images/footer-background.png");
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
+.footer__newsletter p {
+  padding-top: 10px;
+  padding-bottom: 25px;
+}
+
+.email {
+  padding: 7px 8px;
+  border: 1px solid #dcf4ff;
+  color: #535353;
+  font-size: 14px;
+  font-family: "Assistant-Regular", sans-serif;
+  width: 350px;
+}
+
+.subscribe-bttn {
+  background-color: #000;
+  color: #dcf4ff;
+  font-family: "Assistant-Bold", sans-serif;
+  font-size: 16px;
+  text-transform: uppercase;
+  padding: 5px 20px;
+  border-style: none;
+  border-radius: 5px;
+  letter-spacing: 1px;
+}
+
+.subscribe-bttn:hover {
+  background-color: #dcf4ff;
+  color: #000;
+  border: 1px solid #000;
+}
+.footer__socialmedia {
+  background-color: #fff;
+  padding: 20px 80px;
+  display: flex;
+  justify-content: space-between;
+}
+
+.bodoni-font {
+  font-family: "Bodoni-MT-Black", serif;
+  font-size: 28px;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+.social-media {
+  list-style-type: none;
+  display: flex;
+  fill: #000;
+}
+
+.social-media li {
+  padding-left: 60px;
+}
+
+.footer__info {
+  background-color: #dcf4ff;
+  padding: 40px 80px;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+.footer__info h3 {
+  font-family: "Bodoni-MT-Black", serif;
+  font-size: 20px;
+  text-transform: uppercase;
+}
+
+.footer__info__text {
+  display: flex;
+  flex-direction: row;
+}
+.footer__info__links {
+  display: flex;
+  flex-direction: column;
+  padding-left: 100px;
+}
+
+.footer__info__links a {
+  font-family: "Assistant-Regular", sans-serif;
+  font-size: 14px;
+  text-decoration: none;
+  color: #000;
+  padding: 3px 0;
+}
+
+.footer__info__links a:hover {
+  text-decoration: underline;
+}
+.footer__copyright {
+  background-color: #fff;
+  font-family: "Assistant-Regular", sans-serif;
+  font-size: 12px;
+  text-align: center;
+  padding: 10px 0;
+  margin-bottom: 0 !important;
+}

@@ -1,0 +1,47 @@
+.main__registrierung {
+  padding: 80px;
+  background-image: url(images/login-reg-background.jpg);
+  background-repeat: no-repeat;
+  background-size: cover;
+  display: flex;
+  justify-content: center;
+}
+
+.main__registrierung-form {
+  background-color: #dcf4ff;
+  padding: 60px;
+  border-radius: 15px;
+  width: 40%;
+}
+
+.main__registrierung-form__input {
+  display: flex;
+  justify-content: space-between;
+  margin: 8px 0;
+  font-size: 16px;
+  font-family: "Assistant-Regular", sans-serif;
+}
+
+.input {
+  border: 1px solid #535353;
+  border-radius: 5px;
+  background-color: #fff;
+  color: #535353;
+  padding: 5px;
+  width: 60%;
+}
+
+.register-bttn {
+  background-color: #ffc4ac;
+  border: none;
+  border-radius: 5px;
+  padding: 6px 20px;
+  margin: 8px 75px 0;
+  text-transform: uppercase;
+  font-size: 16px;
+  font-family: "Assistant-Regular", sans-serif;
+  font-weight: 700;
+  cursor: pointer;
+  display: flex;
+  align-content: center;
+}
