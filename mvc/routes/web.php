@@ -36,6 +36,6 @@ return [
      * Users Routes
      */
     '/users' => [UserController::class, 'index'],
-    '/users/{id}/show' => [UserController::class, 'show'],
+    '/users/{id}/show' => [UserController::class, 'show']
     
 ];
