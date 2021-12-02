@@ -55,4 +55,17 @@ class Product extends AbstractModel {
          */
         return self::handleResult($result);
     }
+
+    /**
+     * Getter für Images.
+     *
+     * @return array
+     */
+    public function getImages(): array
+    {
+        /**
+         * Nachdem $this->images ein JSON-Array ist, wandeln wir ihn hier in ein natives PHP Array um.
+         */
+        return json_decode($this->images);
+    }
 }
