@@ -10,6 +10,8 @@ class User extends AbstractUser{
 
     use SoftDelete;
 
+    public const TABLENAME='user'; 
+
     public function __construct(
         public ?int $id = null,
         public string $username = '',

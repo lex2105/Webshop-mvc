@@ -27,9 +27,9 @@
 
         <nav>
             <a href="<?php echo BASE_URL; ?>/home">Home</a>
-            <a href="<?php echo BASE_URL; ?>/face">Face</a>
-            <a href="<?php echo BASE_URL; ?>/eyes">Eyes</a>
-            <a href="<?php echo BASE_URL; ?>/lipps">Lipps</a>
-            <a href="<?php echo BASE_URL; ?>/christmas">Christmas collection</a>
+            <a href="<?php echo BASE_URL; ?>/products/face">Face</a>
+            <a href="<?php echo BASE_URL; ?>/products/eyes">Eyes</a>
+            <a href="<?php echo BASE_URL; ?>/products/lips">Lips</a>
+            <a href="<?php echo BASE_URL; ?>/products/christmas">Christmas collection</a>
         </nav>
     </header>

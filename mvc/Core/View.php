@@ -2,6 +2,9 @@
 
 namespace Core;
 
+/**
+ * Views und Error Views laden
+ */
 class View
 {
 

@@ -180,6 +180,71 @@ class Validator {
     }
 
     /**
+     * Hochgeladene Dateien validieren.
+     *
+     * @param array       $files
+     * @param string      $label
+     * @param string|null $type
+     * @param int|null    $maxFileSize
+     *
+     * @return bool
+     */
+    public function file(array $files, string $label, ?string $type = null, ?int $maxFileSize = null): bool
+    {
+        /**
+         * Wurde eine Datei hochgeladen?
+         */
+        if ($files['error'][0] !== UPLOAD_ERR_NO_FILE) {
+            /**
+             * Fallback für die max-upload-size holen, falls der Parameter nicht gesetzt wurde.
+             */
+            if (empty($maxFileSize)) {
+                $maxFileSize = Config::get('app.max-upload-size', 0);
+            }
+
+            /**
+             * Alle Uploads durchgehen.
+             */
+            foreach ($files['name'] as $index => $filename) {
+                /**
+                 * Ist ein Upload-Fehler aufgetreten, schreiben wir einen Fehler.
+                 */
+                if ($files['error'][$index] !== UPLOAD_ERR_OK) {
+                    $this->errors[] = sprintf($this->errorMessages['file-error'], $label);
+                    return false;
+                }
+
+                /**
+                 * Ist ein Typ definiert und stimmt dieser Type aber nicht überein, schreiben wir einen Fehler.
+                 */
+                if (!empty($type)) {
+                    $_type = $files['type'][$index];
+                    if (!str_starts_with($_type, $type)) {
+                        $this->errors[] = sprintf($this->errorMessages['file-type'], $label, $type);
+                        return false;
+                    }
+                }
+
+                /**
+                 * Überschreitet die Datei das Upload-Limit, schreiben wir einen Fehler.
+                 */
+                if (!empty($maxFileSize)) {
+                    $_filesize = $files['size'][$index];
+                    if ($_filesize > $maxFileSize) {
+                        $this->errors[] = sprintf($this->errorMessages['file-size'], $label, $maxFileSize / 1024 / 1024);
+                        return false;
+                    }
+                }
+            }
+        }
+
+        /**
+         * Ist bisher kein Fehler aufgetreten, war die Validierung erfolgreich.
+         */
+        return true;
+    }
+
+    /**
      * Diese Funktion hilft uns dabei, Standardwerte für alle Parameter in $arguments aus __call() zu setzen. Das ist
      * nötig, weil wir normalerweise Standardwerte für optionale Paramater direkt in der Funktion definieren können. Die
      * __call()-Methode erhält die Funktionsparameter aber als ein Array $arguments, wodurch wir die Funktionalität für

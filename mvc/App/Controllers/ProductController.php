@@ -9,8 +9,10 @@ class ProductController {
 
     public function index() {
         $products = Product::all();
-
-        View::render('products/index', ['products' => $products]);
+        
+        View::render('products/index', [
+            'category' => "All",
+            'products' => $products]);
 
     }
 
@@ -18,8 +20,18 @@ class ProductController {
     {
         $product = Product::findOrFail($id);
 
-        View::render('products/details', [
+        View::render('products/detail', [
             'product' => $product
+        ]);
+    }
+
+    public function showCategory(string $category)
+    {
+        $products = Product::findByCategory($category);
+
+        View::render('products/index', [
+            'category' => $category,
+            'products' => $products
         ]);
     }
 }

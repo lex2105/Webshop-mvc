@@ -42,32 +42,11 @@ class Router
          * Route-Files laden.
          */
         $webRoutes = require_once __DIR__ . '/../routes/web.php'; // bspw. /var/www/html/mvc/core/
-        $apiRoutes = require_once __DIR__ . '/../routes/api.php';
 
         /**
          * Property setzen, damit die Routen in diesem Objekt immer überall verfügbar sind.
          */
         $this->routes = $webRoutes;
-
-        /**
-         * Alle API Routen durchgehen und prefixen.
-         */
-        foreach ($apiRoutes as $apiRoute => $callable) {
-            /**
-             * Allen API Routen /api/ voranstellen, damit sie eindeutig als API Routen erkennbar sind.
-             */
-            $route = "/api/$apiRoute";
-
-            /**
-             * Doppelte Slashes in allen API Routen entfernen, die durch das Prefixing entstanden sein könnten.
-             */
-            $route = str_replace('//', '/', $route);
-
-            /**
-             * "fertige" API Route zu den anderen Routes hinzufügen.
-             */
-            $this->routes[$route] = $callable;
-        }
     }
 
     /**

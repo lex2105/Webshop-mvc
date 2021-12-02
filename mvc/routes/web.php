@@ -15,7 +15,7 @@ return [
     /**
      * Home Route
      */
-    '/home' => [HomeController::class, 'home'],
+    '/home' => [ProductController::class, 'index'],
 
     /**
      * Auth Routes
@@ -31,6 +31,7 @@ return [
      */
     '/products' => [ProductController::class, 'index'],
     '/products/{id}/show' => [ProductController::class, 'show'],
+    '/products/{category}' => [ProductController::class, 'showCategory'],
 
     /**
      * Users Routes

@@ -10,12 +10,6 @@ class HomeController{
     public function index(){
         $products = product::all();
 
-        View::render('products/index', ['products' => $products]);
-    }
-
-    public function home(){
-        $users = user::all();
-
-        View::render('home', ['users' => $users]);
+        View::render('products/index', ['category' => "All", 'products' => $products]);
     }
 }
