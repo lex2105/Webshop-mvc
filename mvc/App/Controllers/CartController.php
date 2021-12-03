@@ -174,9 +174,6 @@ class CartController
             $errors[] = 'An error occurred. Please try again!';
             Session::set('errors', $errors);
 
-            /**
-             * Redirect zurück zum Registrierungsformular.
-             */
             Redirector::redirect('/checkout');
         }
     }

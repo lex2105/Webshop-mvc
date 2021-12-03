@@ -1,3 +1,119 @@
+.main__checkout-wrapper {
+  padding: 80px;
+  background-image: url("../../Resources/images/login-reg-background.jpg");
+}
+
+.main__checkout__title {
+  font-size: 26px;
+  font-family: "Bodoni-MT-Black", serif;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  text-align: center;
+  padding-bottom: 25px;
+}
+
+.cart-table {
+  width: 98%;
+  margin: 10px;
+  background-color: #dcf4ff;
+  border-radius: 10px;
+}
+
+.cart-table th {
+  font-family: "Assistant-Bold", sans-serif;
+  font-size: 18px;
+  /* text-transform: uppercase; */
+  text-align: left;
+  padding: 5px;
+}
+
+.cart-table td {
+  font-size: 16px;
+  font-family: "Assistant-Regular", sans-serif;
+  text-align: left;
+  padding: 7px;
+}
+
+.add-bttn {
+  text-decoration: none;
+  color: #000;
+  font-size: 16px;
+  border: 1px solid #000;
+  border-radius: 3px;
+  padding: 0 4px;
+  margin-right: 2px;
+}
+
+.remove-bttn {
+  text-decoration: none;
+  color: #000;
+  font-size: 16px;
+  border: 1px solid #000;
+  border-radius: 3px;
+  padding: 0 5px;
+  margin-left: 2px;
+}
+
+.remove-all-bttn {
+  padding-left: 5px;
+}
+
+.checkout-bttn {
+  text-decoration: none;
+  font-size: 18px;
+  font-family: "Assistant-Bold", sans-serif;
+  text-transform: uppercase;
+  color: #000;
+  background-color: #ffc4ac;
+  border-radius: 10px;
+  padding: 6px 30px;
+  margin-top: 20px;
+  display: inline-flex;
+  justify-content: center;
+  cursor: pointer;
+}
+
+.checkout-form {
+  display: flex;
+  justify-content: space-between;
+}
+
+.main__checkout__field__part {
+  background-color: #dcf4ff;
+  border-radius: 10px;
+  margin: 30px 10px;
+  padding: 40px;
+  width: 50%;
+}
+
+.checkout__field__part__title {
+  font-size: 24px;
+  font-family: "Assistant-Regular", sans-serif;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  text-align: center;
+}
+
+.main__checkout__input {
+  display: flex;
+  justify-content: space-between;
+  margin: 8px 0;
+  font-size: 16px;
+  font-family: "Assistant-Regular", sans-serif;
+}
+
+.main__checkout__finish-bttn {
+  padding: 10px 35px;
+  background-color: #ffc4ac;
+  border: none;
+  border-radius: 10px;
+  font-size: 18px;
+  font-family: "Assistant-Bold", sans-serif;
+  text-transform: uppercase;
+  align-self: center;
+  cursor: pointer;
+}
+
 .thankyou-wrapper {
   background-image: url("../../Resources/images/bestsellers-background.jpg");
   background-repeat: no-repeat;

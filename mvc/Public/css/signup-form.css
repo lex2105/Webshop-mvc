@@ -1,6 +1,6 @@
 .main__registrierung {
   padding: 80px;
-  background-image: url(images/login-reg-background.jpg);
+  background-image: url("../../Resources/images/login-reg-background.jpg");
   background-repeat: no-repeat;
   background-size: cover;
   display: flex;

@@ -1,7 +1,7 @@
 .main__login-registrierung {
   padding: 80px;
   text-align: center;
-  background-image: url(images/login-reg-background.jpg);
+  background-image: url("../../Resources/images/login-reg-background.jpg");
   background-repeat: no-repeat;
   background-size: cover;
   display: flex;
