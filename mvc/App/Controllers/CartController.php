@@ -10,6 +10,7 @@ use Core\View;
 use Core\Validator;
 use Core\Session;
 use Core\Models\AbstractUser;
+use App\Models\OrderItem;
 
 /**
  * Cart Controller
@@ -154,26 +155,68 @@ class CartController
 
         $order = new Order();
         $order->fill($_POST);
+
+
         /**
          * ako validacija prođe onda ovdje pišemo kod za snimanje i prikaz thank you ekrana
          * 
          */
 
         if ($order->save()) {
+            
             /**
              * Hat alles funktioniert und sind keine Fehler aufgetreten, leiten wir zum Login Formular.
              *
              * Um eine Erfolgsmeldung ausgeben zu können, verwenden wir dieselbe Mechanik wie für die errors.
              */
-            CartService::destroy();
-            // Session::set('success', ['Thank you!']);
-            View::render('thankyou',[]);
 
+        /**
+         * order_items su proizvodi u košarici
+         * 1. dohvatiti proizvode iz košarice
+         * 2. za svaki proizvod iz košarice kreirati order item
+         * 2a. svakom order_itemu dodati order_id
+         * 3. snimiti svaki order item
+         */
+            $productItems = CartService::get();
+            var_dump($order->price);
+            $orderItems = [];
+            $saveOrderItemsSuccessfull = true;
+            foreach($productItems as $productItem){
+                $orderItem = new OrderItem();
+                $orderItem->order_id = $order->id;
+                $orderItem->product_id = $productItem->id;
+                $orderItem->quantity = $productItem->count;
+                $orderItem->price = $productItem->price;
+                var_dump($orderItem->price);
+                $saveResult = $orderItem->save();
+                var_dump($orderItem->price);
+                $saveOrderItemsSuccessfull = $saveOrderItemsSuccessfull && $saveResult;
+                $orderItems[]=$orderItem;
+            }
+
+            if ($saveOrderItemsSuccessfull)
+            {
+                CartService::destroy();
+                View::render('thankyou',[]);
+            }
+            else{
+                foreach($orderItems as $orderItem)
+                {
+                    if($orderItem->id!=null)
+                    {
+                        $orderItem->delete();
+                    }
+                }
+                $order->delete();
+                $errors[] = 'An error occurred while saving order items. Please try again!';
+                Session::set('errors', $errors);
+                Redirector::redirect('/checkout');
+            }
         } else {
             /**
              * Fehlermeldung erstellen und in die Session speichern.
              */
-            $errors[] = 'An error occurred. Please try again!';
+            $errors[] = 'An error occurred while saving order. Please try again!';
             Session::set('errors', $errors);
 
             Redirector::redirect('/checkout');

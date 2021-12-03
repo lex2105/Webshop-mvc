@@ -44,7 +44,7 @@ class Order extends AbstractModel{
                 "UPDATE $tablename SET user_id = ?, price = ?, address = ?, number = ?, postal_code = ?, city = ?, state = ?, card_holder = ?, card_number = ?, expire_date = ?, cvv = ?  WHERE id = ?",
                 [
                     's:user_id' => $this->user_id,
-                    's:price' => $this->price,
+                    'd:price' => $this->price,
                     's:address' => $this->address,
                     's:number' => $this->number,
                     's:postal_code' => $this->postal_code,
@@ -67,7 +67,7 @@ class Order extends AbstractModel{
                 "INSERT INTO $tablename SET user_id = ?, price = ?, address = ?, number = ?, postal_code = ?, city = ?, state = ?, card_holder = ?, card_number = ?, expire_date = ?, cvv = ?",
                 [
                     's:user_id' => $this->user_id,
-                    's:price' => $this->price,
+                    'd:price' => $this->price,
                     's:address' => $this->address,
                     's:number' => $this->number,
                     's:postal_code' => $this->postal_code,

@@ -5,6 +5,7 @@ use App\Controllers\HomeController;
 use App\Controllers\UserController;
 use App\Controllers\ProductController;
 use App\Controllers\CartController;
+use App\Controllers\NewsletterController;
 
 return [
     
@@ -33,6 +34,7 @@ return [
     '/products' => [ProductController::class, 'index'],
     '/products/{id}/show' => [ProductController::class, 'show'],
     '/products/{category}' => [ProductController::class, 'showCategory'],
+    '/search?search={searchTerm}' => [ProductController::class, 'showSearch'],
 
     /**
      * Users Routes
@@ -52,6 +54,10 @@ return [
      * Checkout Routes
      */
     '/checkout' => [CartController::class, 'checkout'],
-    '/checkout/my-order' => [CartController::class, 'saveOrder'],
-    '/validateOrder' => [CartController::class, 'validateOrder']
+    '/validateOrder' => [CartController::class, 'validateOrder'],
+
+    /**
+     * Newsletter Route
+     */
+    '/newsletter' => [NewsletterController::class, 'validateNewsletter']
 ];

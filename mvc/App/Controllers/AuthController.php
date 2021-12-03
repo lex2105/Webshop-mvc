@@ -236,6 +236,7 @@ class AuthController
 
         $user = new User();
         $user->fill($_POST);
+        $user->setPassword($_POST['password']);
         /**
          * ako validacija prođe onda ovdje pišemo kod za snimanje i prikaz thank you ekrana
          * 
@@ -249,9 +250,6 @@ class AuthController
              */
             Session::set('success', ['Thank you!']);
             $user->login('/home');
-            //Redirector::redirect('/');
-            //View::render('thankyou',[]);
-            // $order->('/thankyou');
         } else {
             /**
              * Fehlermeldung erstellen und in die Session speichern.

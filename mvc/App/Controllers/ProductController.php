@@ -34,4 +34,14 @@ class ProductController {
             'products' => $products
         ]);
     }
+
+    public function showSearch(string $searchTerm)
+    {
+        $products = Product::findByNameOrDescription($searchTerm);
+        View::render('products/index', [
+            'category' => "All",
+            'products' => $products]);
+    }
+
+    
 }

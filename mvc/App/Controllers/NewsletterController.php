@@ -1,20 +1,23 @@
 <?php
 
-namespace App\Models;
+namespace App\Controllers;
 
+use Core\Validator;
+use Core\Session;
 use Core\Database;
 use Core\Models\AbstractModel;
+use App\Models\Newsletter;
+use Core\Helpers\Redirector;
 
-class Newsletter extends AbstractModel{
-
-    public const TABLENAME = 'newsletter';
+class NewsletterController extends AbstractModel
+{
     public function __construct(
         public ?int $id = null,
         public string $email = '',
         public string $created_at = '',
         public string $updated_at = '',
-        public ?string $deleted_at = null,
-    ){
+        public ?string $deleted_at = null
+    ) {
     }
 
     public function save(): bool{
@@ -24,12 +27,15 @@ class Newsletter extends AbstractModel{
         $tablename = self::getTablenameFromClassname();
 
         if (!empty($this->id)) {
-
+            /**
+             * Query ausführen und Ergebnis direkt zurückgeben. Das kann entweder true oder false sein, je nachdem ob
+             * der Query funktioniert hat oder nicht.
+             */
             $result = $database->query(
-                "UPDATE $tablename SET email = ?  WHERE id = ?",
+                "UPDATE $tablename SET email = ? WHERE id = ?",
                 [
                     's:email' => $this->email,
-                    'i:id' => $this->id
+                    'i:id' => $this->id,
                 ]
             );
 
@@ -42,7 +48,6 @@ class Newsletter extends AbstractModel{
                 "INSERT INTO $tablename SET email = ?",
                 [
                     's:email' => $this->email,
-
                 ]
             );
 
@@ -58,5 +63,33 @@ class Newsletter extends AbstractModel{
              */
             return $result;
         }
+    }
+
+    public function validateNewsletter ()
+    {
+
+        $validator = new Validator();
+        $validator->email($_POST['email'], label: 'Email', required: true);
+
+        $errors = $validator->getErrors();
+
+        if(!empty($errors)){
+            Session::set('errors', $errors);
+            Redirector::redirect('/');
+        }
+        
+
+        $newsletter = new Newsletter();
+        $newsletter->fill($_POST);
+
+        if($newsletter->save())
+        {
+            Session::set('success', ['You have been successfully added to the newsletter list.']);
+        }
+        else
+        {
+            Session::set('errors', ['There has been a problem. Please try again later.']);
+        }
+        Redirector::redirect('/home');
     }
 }

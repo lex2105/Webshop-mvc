@@ -55,5 +55,34 @@ class Product extends AbstractModel {
         return self::handleResult($result);
     }
 
+    public static function findByNameOrDescription(string $search, ?string $orderBy = null, ?string $direction = null): array
+    {
+        /**
+         * Datenbankverbindung herstellen.
+         */
+        $database = new Database();
+        /**
+         * Tabellennamen berechnen.
+         */
+        $tablename = self::getTablenameFromClassname();
+
+        /**
+         * Query ausführen.
+         *
+         * Wurde in den Funktionsparametern eine Sortierung definiert, so wenden wir sie hier an, andernfalls rufen wir
+         * alles ohne Sortierung ab.
+         */
+        if ($orderBy === null) {
+            $result = $database->query("SELECT * FROM $tablename WHERE `name` like '%$search%' OR `description` like '%$search%'");
+        } else {
+            $result = $database->query("SELECT * FROM $tablename WHERE `name` like '%$search%' OR `description` like '%$search%' ORDER BY $orderBy $direction");
+        }
+
+        /**
+         * Datenbankergebnis verarbeiten und zurückgeben.
+         */
+        return self::handleResult($result);
+    }
+
 
 }
