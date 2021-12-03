@@ -51,5 +51,7 @@ return [
     /**
      * Checkout Routes
      */
-    '/checkout' => [CartController::class, 'checkout']
+    '/checkout' => [CartController::class, 'checkout'],
+    '/checkout/my-order' => [CartController::class, 'saveOrder'],
+    '/validateOrder' => [CartController::class, 'validateOrder']
 ];

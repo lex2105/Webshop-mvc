@@ -3,9 +3,12 @@
 namespace App\Controllers;
 
 use App\Models\Product;
+use App\Models\Order;
 use App\Services\CartService;
 use Core\Helpers\Redirector;
 use Core\View;
+use Core\Validator;
+use Core\Session;
 
 /**
  * Cart Controller
@@ -91,7 +94,7 @@ class CartController
     public function removeAll(int $id)
     {
         /**
-         * Equipment, das komplett aus dem Cart entfernt werden soll, laden.
+         * Products, das komplett aus dem Cart entfernt werden soll, laden.
          */
         $product = Product::findOrFail($id);
 
@@ -109,13 +112,10 @@ class CartController
     public function checkout ()
     {
         /**
-         * omogući unos adrese za dostavu i načina plaćanja
-         * 
-         * na tom ekranu treba također prikazati i sve stavke koje je korisnik kupio
-         * odaberi način dostave
-         * kontrola da svi podaci moraju biti popunjeni
-         *   
-         * 
+         * [x] prikaz svih proizvoda koje je korisnik kupio sa ukupnom cijenom
+         * [] prikaz formulara za unos adrese za dostavu i način plaćanja
+         * [] provjera da su svi podaci ispravno popunjeni
+         * [] spremanje podataka u bazu
          */
 
         $productsInCart = CartService::get();
@@ -126,12 +126,58 @@ class CartController
         View::render('checkout', ['products' => $productsInCart]);
     }
 
-    public function saveOrder ()
+    public function validateOrder ()
     {
         /* 
-         * snimi sve podatke o narudžbi u bazu
-         *  moramo imati model za narudžbu
+         * [] spremanje svih podataka o narudžbi u databazu
+         * [x] model za narudžbu
+         */
+        $validator = new Validator();
+        $validator->letters($_POST['address'], label: 'Address', required: true);
+        $validator->numeric($_POST['number'], label: 'Number', required: true);
+        $validator->numeric($_POST['postal_code'], label: 'Postal code', required: true);
+        $validator->letters($_POST['city'], label: 'City', required: true);
+        $validator->letters($_POST['state'], label: 'State', required: true);
+        /* $validator->letters($_POST['card_type'], label: 'Card type', required: true); */
+        $validator->letters($_POST['card_holder'], label: 'Card name', required: true);
+        $validator->numeric($_POST['card_number'], label: 'Card number', required: true);
+        $validator->numeric($_POST['expire_date'], label: 'Expire date', required: true);
+        $validator->numeric($_POST['cvv'], label: 'CVV', min: 8, required: true);
+
+        $errors = $validator->getErrors();
+
+        if(!empty($errors)){
+            Session::set('errors', $errors);
+            Redirector::redirect('/checkout');
+        }
+
+        $order = new Order();
+        $order->fill($_POST);
+        /**
+         * ako validacija prođe onda ovdje pišemo kod za snimanje i prikaz thank you ekrana
+         * 
          */
 
+        if ($order->save()) {
+            /**
+             * Hat alles funktioniert und sind keine Fehler aufgetreten, leiten wir zum Login Formular.
+             *
+             * Um eine Erfolgsmeldung ausgeben zu können, verwenden wir dieselbe Mechanik wie für die errors.
+             */
+            Session::set('success', ['Thank you!']);
+            Redirector::redirect('/thankyou');
+            // $order->('/thankyou');
+        } else {
+            /**
+             * Fehlermeldung erstellen und in die Session speichern.
+             */
+            $errors[] = 'An error occurred. Please try again!';
+            Session::set('errors', $errors);
+
+            /**
+             * Redirect zurück zum Registrierungsformular.
+             */
+            Redirector::redirect('/checkout');
+        }
     }
 }

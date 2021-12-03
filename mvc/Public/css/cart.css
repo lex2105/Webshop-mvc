@@ -1,0 +1,15 @@
+.thankyou-wrapper {
+  background-image: url("../../Resources/images/bestsellers-background.jpg");
+  background-repeat: no-repeat;
+  background-size: cover;
+  padding: 80px;
+}
+.thankyou {
+  padding: 30px;
+  background-color: #fff;
+}
+
+.thankyou-title {
+  font-size: 26px;
+  text-align: center;
+}
