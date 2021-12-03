@@ -24,16 +24,16 @@ abstract class AbstractUser extends AbstractModel
     const LOGGED_IN_USER_ID = 'logged_in_user_id';
 
     /**
-     * @param string $emailOrUsername
+     * @param string $username
      *
      * @return object|null
      */
-    public static function findByEmailOrUsername(string $emailOrUsername): ?object
+    public static function findByUsername(string $username): ?object
     {
         /**
          * Whitespace entfernen.
          */
-        $emailOrUsername = trim($emailOrUsername);
+        $username = trim($username);
 
         /**
          * Datenbankverbindung herstellen.
@@ -52,9 +52,8 @@ abstract class AbstractUser extends AbstractModel
          * nur dann die Möglichkeit, dass wir mehr als ein Ergebnis erhalten, wenn jemand eine Fremde E-Mail-Adresse als
          * Username verwendet hat.
          */
-        $result = $database->query("SELECT * FROM $tablename WHERE email = ? OR username = ? LIMIT 1", [
-            's:email' => $emailOrUsername,
-            's:username' => $emailOrUsername
+        $result = $database->query("SELECT * FROM $tablename WHERE  username = ? LIMIT 1", [
+            's:username' => $username
         ]);
 
         /**

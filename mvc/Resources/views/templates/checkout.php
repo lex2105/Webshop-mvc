@@ -1,3 +1,15 @@
+<?php 
+    if (\App\Models\User::isLoggedIn())
+    {
+        $userId = \App\Models\User::getLoggedIn()->id;
+    }
+    else
+    {
+        $userId = null;
+    }
+
+
+?>
 <div class="main__checkout-wrapper">
     <h1 class="main__checkout__title">Checkout</h1>
     <div class="main__checkout__field">
@@ -31,7 +43,7 @@
             <?php
             endforeach; ?>
             <tr>
-                <td colspan = 5>Total: </td>
+                <td colspan = 2>Total:</td>
                 <td><?php echo $total; ?> €</td>
             </tr>
         </table>
@@ -93,7 +105,7 @@
 
                     <div class="main__checkout__input">
                         <label for="expire_date">Expire date:</label>
-                        <input type="date" name="expire_date" class="input">
+                        <input type="text" name="expire_date" class="input">
                     </div>
 
                     <div class="main__checkout__input">
@@ -102,8 +114,7 @@
                     </div>
                 </div>
                 <input type="hidden" name="price" value="<?php echo $total; ?>" />
-                <input type="hidden" name="user_id" value ="<?php $user_id = Session::get(self::LOGGED_IN_USER_ID, null); ?>"/>
-                
+                <input type="hidden" name="user_id" value ="<?php echo $userId; ?>"/>
             </div>
             <button type="submit" class="main__checkout__finish-bttn">Finish order</button>
         </form>

@@ -18,14 +18,14 @@ class Order extends AbstractModel{
         public string $updated_at = '',
         public ?string $deleted_at = null,
         public string $address = '',
-        public int $number = '',
-        public int $postal_code = '',
+        public int $number = 0,
+        public int $postal_code = 0,
         public string $city = '',
         public string $state = '',
         public string $card_holder = '',
-        public int $card_number = '',
-        public int $expire_date = '',
-        public int $cvv = '',
+        public int $card_number = 0,
+        public string $expire_date = '',
+        public int $cvv = 0,
     ){
     }
 
@@ -64,7 +64,7 @@ class Order extends AbstractModel{
              * Hat das Objekt keine id, so müssen wir es neu anlegen.
              */
             $result = $database->query(
-                "INSERT INTO $tablename SET user_id = ?, price = ?, address = ? number = ?, postal_code = ?, city = ?, state = ?, card_holder = ?, card_number = ?, expire_date = ?, cvv = ?",
+                "INSERT INTO $tablename SET user_id = ?, price = ?, address = ?, number = ?, postal_code = ?, city = ?, state = ?, card_holder = ?, card_number = ?, expire_date = ?, cvv = ?",
                 [
                     's:user_id' => $this->user_id,
                     's:price' => $this->price,

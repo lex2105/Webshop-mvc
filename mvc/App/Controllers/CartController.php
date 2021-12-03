@@ -9,6 +9,7 @@ use Core\Helpers\Redirector;
 use Core\View;
 use Core\Validator;
 use Core\Session;
+use Core\Models\AbstractUser;
 
 /**
  * Cart Controller
@@ -141,8 +142,8 @@ class CartController
         /* $validator->letters($_POST['card_type'], label: 'Card type', required: true); */
         $validator->letters($_POST['card_holder'], label: 'Card name', required: true);
         $validator->numeric($_POST['card_number'], label: 'Card number', required: true);
-        $validator->numeric($_POST['expire_date'], label: 'Expire date', required: true);
-        $validator->numeric($_POST['cvv'], label: 'CVV', min: 8, required: true);
+        $validator->ccexpire($_POST['expire_date'], label: 'Expire date', required: true);
+        $validator->numeric($_POST['cvv'], label: 'CVV', min: 100, max: 999, required: true);
 
         $errors = $validator->getErrors();
 
@@ -164,9 +165,10 @@ class CartController
              *
              * Um eine Erfolgsmeldung ausgeben zu können, verwenden wir dieselbe Mechanik wie für die errors.
              */
-            Session::set('success', ['Thank you!']);
-            Redirector::redirect('/thankyou');
-            // $order->('/thankyou');
+            CartService::destroy();
+            // Session::set('success', ['Thank you!']);
+            View::render('thankyou',[]);
+
         } else {
             /**
              * Fehlermeldung erstellen und in die Session speichern.

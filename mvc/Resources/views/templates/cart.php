@@ -42,10 +42,15 @@
         <?php
         endforeach; ?>
         <tr>
-            <td colspan = 5>Total: </td>
-            <td><?php echo $total; ?> €</td>
+            <td colspan = 4><b>Total:</b></td>
+            <td><b><?php echo $total; ?> €</b></td>
+            
         </tr>
     </table>
-
+    
+    <?php if (\App\Models\User::isLoggedIn()): ?>
     <a href="<?php echo BASE_URL; ?>/checkout" class="checkout-bttn">Checkout</a>
+    <?php else: ?>
+    <a href="<?php echo BASE_URL; ?>/login" class="checkout-bttn">Login</a>
+    <?php endif; ?>
 </div>

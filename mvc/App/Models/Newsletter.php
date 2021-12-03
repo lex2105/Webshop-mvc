@@ -3,26 +3,18 @@
 namespace App\Models;
 
 use Core\Database;
-use Core\Models\AbstractUser;
-use Core\Traits\SoftDelete;
+use Core\Models\AbstractModel;
 
-class User extends AbstractUser{
+class Newsletter extends AbstractModel{
 
-    use SoftDelete;
-
-    public const TABLENAME='user'; 
 
     public function __construct(
         public ?int $id = null,
-        public string $username = '',
-        protected string $password = '',
         public string $email = '',
-        public string $firstname = '',
-        public string $lastname = '',
         public string $created_at = '',
         public string $updated_at = '',
-        public ?string $deleted_at = null
-    ) {
+        public ?string $deleted_at = null,
+    ){
     }
 
     public function save(): bool{
@@ -32,19 +24,12 @@ class User extends AbstractUser{
         $tablename = self::getTablenameFromClassname();
 
         if (!empty($this->id)) {
-            /**
-             * Query ausführen und Ergebnis direkt zurückgeben. Das kann entweder true oder false sein, je nachdem ob
-             * der Query funktioniert hat oder nicht.
-             */
+
             $result = $database->query(
-                "UPDATE $tablename SET username = ?, password = ?, email = ?, firstname = ?, lastname = ? WHERE id = ?",
+                "UPDATE $tablename SET email = ?  WHERE id = ?",
                 [
-                    's:username' => $this->username,
-                    's:password' => $this->password,
                     's:email' => $this->email,
-                    's:firstname' => $this->firstname,
-                    's:lastname' => $this->lastname,
-                    'i:id' => $this->id,
+                    'i:id' => $this->id
                 ]
             );
 
@@ -54,13 +39,10 @@ class User extends AbstractUser{
              * Hat das Objekt keine id, so müssen wir es neu anlegen.
              */
             $result = $database->query(
-                "INSERT INTO $tablename SET username = ?, password = ?, email = ?, firstname = ?, lastname = ?",
+                "INSERT INTO $tablename SET email = ?",
                 [
-                    's:username' => $this->username,
-                    's:password' => $this->password,
                     's:email' => $this->email,
-                    's:firstname' => $this->firstname,
-                    's:lastname' => $this->lastname,
+
                 ]
             );
 

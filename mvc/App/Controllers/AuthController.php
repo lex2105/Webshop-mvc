@@ -53,7 +53,7 @@ class AuthController
          * User anhand einer Email-Adresse oder eines Usernames aus der Datenbank laden.
          * Diese Funktionalität kommt aus der erweiterten Klasse AbstractUser.
          */
-        $user = User::findByEmailOrUsername($_POST['username-or-email']);
+        $user = User::findByUsername($_POST['username']);
 
         /**
          * Fehler-Array vorbereiten
@@ -68,11 +68,13 @@ class AuthController
          * einem Angreifer verraten, dass der Username richtig ist und nur das Passwort noch nicht. Dadurch wäre es
          * nämlich erheblich einfacher, das Passwort zu brute-forcen.
          */
-        if (empty($user) || !$user->checkPassword($_POST['password'])) {
+        if (empty($user)){
+            $errors[] = 'Username not found';
+        } elseif (!$user->checkPassword($_POST['password'])) {
             /**
              * Wenn nein: Fehler!
              */
-            $errors[] = 'Username/E-mail or password are wrong.';
+            $errors[] = 'Password is wrong.';
         } else {
             /**
              * Wenn ja: weiter.
@@ -120,7 +122,7 @@ class AuthController
     /**
      * Daten aus dem Registrierungsformular entgegennehmen und verarbeiten.
      */
-    public function signupDo()
+    public function signupDoProfesor()
     {
         /**
          * [x] Daten validieren
@@ -136,8 +138,8 @@ class AuthController
          */
         $validator = new Validator();
         $validator->email($_POST['email'], 'E-Mail', required: true);
-        $validator->unique($_POST['email'], 'E-Mail', 'users', 'email');
-        $validator->unique($_POST['username'], 'Username', 'users', 'username');
+        $validator->unique($_POST['email'], 'E-Mail', User::TABLENAME, 'email');
+        $validator->unique($_POST['username'], 'Username', User::TABLENAME, 'username');
         $validator->password($_POST['password'], 'Passwort', min: 8, required: true);
         /**
          * Das Feld 'password_repeat' braucht nicht validiert werden, weil wenn 'password' ein valides Passwort ist und
@@ -202,6 +204,62 @@ class AuthController
              * Redirect zurück zum Registrierungsformular.
              */
             Redirector::redirect('/sign-up');
+        }
+    }
+
+    public function signupDo ()
+    {
+       
+        $validator = new Validator();
+        $validator->letters($_POST['firstname'], label: 'Firstname', required: true);
+        $validator->letters($_POST['lastname'], label: 'Lastname', required: true);
+        $validator->email($_POST['email'], label: 'Email', required: true);
+        $validator->unique($_POST['email'], 'E-Mail',User::TABLENAME, 'email');
+        $validator->unique($_POST['username'], 'Username', User::TABLENAME, 'username');
+        $validator->password($_POST['password'], label: 'Password', min: 8, required: true);
+        $validator->compare([
+            $_POST['password'],
+            'Password'
+        ], [
+            $_POST['repeat-password'],
+            'Repeat password'
+        ]);
+
+
+
+        $errors = $validator->getErrors();
+
+        if(!empty($errors)){
+            Session::set('errors', $errors);
+            Redirector::redirect('/sign-up');
+        }
+
+        $user = new User();
+        $user->fill($_POST);
+        /**
+         * ako validacija prođe onda ovdje pišemo kod za snimanje i prikaz thank you ekrana
+         * 
+         */
+
+        if ($user->save()) {
+            /**
+             * Hat alles funktioniert und sind keine Fehler aufgetreten, leiten wir zum Login Formular.
+             *
+             * Um eine Erfolgsmeldung ausgeben zu können, verwenden wir dieselbe Mechanik wie für die errors.
+             */
+            Session::set('success', ['Thank you!']);
+            $user->login('/home');
+            //Redirector::redirect('/');
+            //View::render('thankyou',[]);
+            // $order->('/thankyou');
+        } else {
+            /**
+             * Fehlermeldung erstellen und in die Session speichern.
+             */
+            $errors[] = 'An error occurred. Please try again!';
+            Session::set('errors', $errors);
+
+            Redirector::redirect('/');
         }
     }
 

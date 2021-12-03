@@ -9,10 +9,6 @@
             <input type="text" name="lastname" id="lastname" class="input">
         </div>
         <div class="main__registrierung-form__input">
-            <label for="address">Address:</label>
-            <input type="text" name="address" id="address" class="input">
-        </div>
-        <div class="main__registrierung-form__input">
             <label for="email">Email:</label>
             <input type="email" name="email" id="email" class="input">
         </div>
