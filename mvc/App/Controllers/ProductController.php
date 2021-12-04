@@ -11,12 +11,12 @@ class ProductController {
         $products = Product::all();
         
         View::render('products/index', [
-            'category' => "All",
+            'category' => "All our products",
             'products' => $products]);
 
     }
 
-    public function show(int $id)
+    public function showProduct(int $id)
     {
         $product = Product::findOrFail($id);
 
@@ -39,7 +39,7 @@ class ProductController {
     {
         $products = Product::findByNameOrDescription($searchTerm);
         View::render('products/index', [
-            'category' => "All",
+            'category' => "All our products",
             'products' => $products]);
     }
 

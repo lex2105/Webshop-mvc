@@ -115,17 +115,31 @@
 }
 
 .thankyou-wrapper {
-  background-image: url("../../Resources/images/bestsellers-background.jpg");
+  background-image: url("../../Resources/images/login-reg-background.jpg");
   background-repeat: no-repeat;
   background-size: cover;
-  padding: 80px;
-}
-.thankyou {
-  padding: 30px;
-  background-color: #fff;
+  padding: 120px;
 }
 
 .thankyou-title {
   font-size: 26px;
   text-align: center;
+  margin-bottom: 80px;
+}
+
+.thankyou-bttn {
+  padding: 10px 40px;
+  background-color: #ffc4ac;
+  border: none;
+  border-radius: 10px;
+  font-size: 18px;
+  font-family: "Assistant-Bold", sans-serif;
+  text-transform: uppercase;
+  text-decoration: none;
+  color: #000;
+  align-self: center;
+  cursor: pointer;
+  display: flex;
+  width: 250px;
+  margin: 0 auto;
 }

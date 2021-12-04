@@ -38,6 +38,10 @@ input[type="password"] {
   margin: 8px 0;
 }
 
+.main__login-registrierung__cards > a {
+  text-decoration: none;
+}
+
 .signin-bttn {
   background-color: #ffc4ac;
   border: none;
@@ -72,4 +76,5 @@ input[type="password"] {
   color: #000;
   cursor: pointer;
   width: 100%;
+  text-decoration: none;
 }

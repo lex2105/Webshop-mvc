@@ -140,13 +140,16 @@ class CartController
         $validator->numeric($_POST['postal_code'], label: 'Postal code', required: true);
         $validator->letters($_POST['city'], label: 'City', required: true);
         $validator->letters($_POST['state'], label: 'State', required: true);
-        /* $validator->letters($_POST['card_type'], label: 'Card type', required: true); */
         $validator->letters($_POST['card_holder'], label: 'Card name', required: true);
         $validator->numeric($_POST['card_number'], label: 'Card number', required: true);
         $validator->ccexpire($_POST['expire_date'], label: 'Expire date', required: true);
         $validator->numeric($_POST['cvv'], label: 'CVV', min: 100, max: 999, required: true);
 
         $errors = $validator->getErrors();
+        if (!isset($_POST['card_type'])) {
+            $errors[] = 'Card type is not set.';
+        }
+
 
         if(!empty($errors)){
             Session::set('errors', $errors);
@@ -178,7 +181,6 @@ class CartController
          * 3. snimiti svaki order item
          */
             $productItems = CartService::get();
-            var_dump($order->price);
             $orderItems = [];
             $saveOrderItemsSuccessfull = true;
             foreach($productItems as $productItem){
@@ -187,9 +189,7 @@ class CartController
                 $orderItem->product_id = $productItem->id;
                 $orderItem->quantity = $productItem->count;
                 $orderItem->price = $productItem->price;
-                var_dump($orderItem->price);
                 $saveResult = $orderItem->save();
-                var_dump($orderItem->price);
                 $saveOrderItemsSuccessfull = $saveOrderItemsSuccessfull && $saveResult;
                 $orderItems[]=$orderItem;
             }

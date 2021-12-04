@@ -6,7 +6,6 @@
                 <input type="password" name="password" placeholder="Password">
                 <button type="submit" class="signin-bttn">Sign in</button>
             </form>
-            <a class="forgot-pass" href="#">Forgot password?</a>
         </div>
 
         <div class="main__login-registrierung__cards">

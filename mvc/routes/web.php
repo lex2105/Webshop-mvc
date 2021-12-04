@@ -32,7 +32,7 @@ return [
      * Products Routes
      */
     '/products' => [ProductController::class, 'index'],
-    '/products/{id}/show' => [ProductController::class, 'show'],
+    '/products/{id}/showProduct' => [ProductController::class, 'showProduct'],
     '/products/{category}' => [ProductController::class, 'showCategory'],
     '/search?search={searchTerm}' => [ProductController::class, 'showSearch'],
 

@@ -1,11 +1,11 @@
 <div class="main__product">
     <div class="main__product__img">
-        <img src="images/31qY4Cpf9xL.jpg" alt="product">
+        <img src="<?php echo IMAGES_URL . $product->image; ?>" alt="<?php echo $product->name; ?>" class="img-border img-size">
     </div>
     <div class="main__product__info">
-        <h1 class="product-name">Best skin ever foundation</h1>
-        <p class="price"><?php echo $product->price; ?></p>
-        <p class="description">This light-as-air, talc-free foundation blurs the look of pores and fine lines, and gives you a soft-focus, photo-ready effect. Perfect for all skin types. </p>
-        <button class="basket-bttn">In den Warenkorb</button>
+        <h1 class="product-name"><?php echo $product->name; ?></h1>
+        <p class="price"><?php echo $product->price; ?> €</p>
+        <p class="description"><?php echo $product->description; ?></p>
+        <a href="<?php echo BASE_URL . "/products/$product->id/add-to-cart"; ?>" class="cart-bttn-wide">Add to cart</a>
     </div>
 </div>

@@ -106,61 +106,30 @@ nav a:hover {
   text-decoration: underline;
 }
 
-/* ########################################## MAIN ############# */
-.main {
-  padding: 40px 80px;
-}
+/* ########################################## MAIN ###################### */
 
-.main__background {
-  background-image: url("../../Resources/images/main-action.jpg");
+.main__products-overview {
+  background-image: url("../../Resources/images/ubersicht-background.jpg");
   background-repeat: no-repeat;
   background-size: cover;
-}
-
-.main__action {
-  padding: 300px 0;
-  width: 230px;
-  background-color: #ffc4ac;
-  text-align: center;
-}
-
-.main__action h2 {
-  font-family: "Assistant-Bold";
-}
-
-.main__action p {
-  font-size: 16px;
-}
-
-.shop-bttn {
-  border: 1px solid #dcf4ff;
-  border-radius: 5px;
-  background-color: #ffc4ac;
-  text-transform: uppercase;
-  font-size: 16px;
-  font-family: "Assistant-Regular", sans-serif;
-  font-weight: 500;
-  padding: 5px 25px;
-}
-
-.main__bestsellers {
   padding: 80px;
   text-align: center;
-  background-image: url("../../Resources/images/bestsellers-background.jpg");
-  background-repeat: no-repeat;
-  background-size: cover;
 }
 
-.main__bestsellers h1 {
-  font-family: "Bodoni-MT-Black", serif;
-  font-size: 28px;
+.main__products-overview h1 {
   text-transform: uppercase;
+  font-family: "Bodoni-MT-Black", serif;
+  font-size: 30px;
+  letter-spacing: 3px;
 }
 
 .main__cards {
-  display: flex;
-  justify-content: space-between;
-  padding-top: 30px;
+  display: grid;
+  grid-template-columns: auto auto auto auto;
+}
+
+.card {
+  margin-top: 50px;
 }
 
 .card p {
@@ -171,6 +140,12 @@ nav a:hover {
 
 .card_name {
   padding-top: 15px;
+  padding-bottom: 15px;
+}
+
+.card_name a {
+  text-decoration: none;
+  color: #000;
 }
 
 .basket-bttn {
@@ -180,6 +155,72 @@ nav a:hover {
   margin-top: 10px;
   background-color: #ffc4ac;
   font-size: 14px;
+  font-family: "Assistant-Bold", serif;
+  text-transform: uppercase;
+  text-decoration: none;
+  color: #000;
+}
+
+.blue {
+  background-color: #dcf4ff !important;
+}
+
+.img-border {
+  border: 1px solid #535353;
+  border-radius: 5px;
+}
+
+.top {
+  padding-top: 80px;
+}
+
+/* ####################################### DETAIL PAGE ################################# */
+.main__product {
+  background-image: url(../../Resources/images/ubersicht-background.jpg);
+  background-repeat: no-repeat;
+  background-size: contain;
+  padding: 80px;
+  display: flex;
+}
+
+.main__product__img {
+  flex-basis: 80%;
+}
+
+.img-size {
+  height: 80%;
+}
+
+.product-name {
+  font-family: "Bodoni-MT-Black", sans-serif;
+  font-size: 32px;
+  letter-spacing: 1px;
+}
+
+.price {
+  font-family: "Bodoni-MT-Black", sans-serif;
+  font-size: 20px;
+  margin-top: 10px;
+}
+
+.cart-bttn-wide {
+  border-radius: 5px;
+  border: none;
+  padding: 10px 40px;
+  /* margin-top: 10px; */
+  background-color: #dcf4ff;
+  font-size: 18px;
+  font-family: "Assistant-Bold", serif;
+  text-transform: uppercase;
+  text-decoration: none;
+  color: #000;
+}
+
+.description {
+  font-family: "Assistant-Regular", sans-serif;
+  font-size: 18px;
+  margin-top: 20px;
+  margin-bottom: 40px;
 }
 
 /* ####################################### FOOTER ################################# */

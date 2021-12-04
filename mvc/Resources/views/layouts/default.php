@@ -7,7 +7,6 @@
     <title>Lunar Beauty</title>
 
     <link rel="stylesheet" href="<?php echo BASE_URL; ?>/css/style.css">
-    <link rel="stylesheet" href="<?php echo BASE_URL; ?>/css/products.css">
     <link rel="stylesheet" href="<?php echo BASE_URL; ?>/css/detail.css">
     <link rel="stylesheet" href="<?php echo BASE_URL; ?>/css/login.css">
     <link rel="stylesheet" href="<?php echo BASE_URL; ?>/css/signup-form.css">

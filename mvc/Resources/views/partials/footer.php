@@ -3,7 +3,7 @@
             <h3 class="bodoni-font">Stay in touch</h3>
             <p>Als Erster über unsere exklusiven Angebote und Aktionen informiert werden</p>
             <form action="<?php echo BASE_URL; ?>/newsletter" method="post">
-                <label for="email">Your email:</label>
+                <label for="email" hidden>Your email:</label>
                 <input type="email" name="email" id="email" class="email" placeholder="Geben Sie Ihre E-Mail Adresse ein">
                 <button type="submit" class="subscribe-bttn">Jetzt anmelden</button>
             </form>
