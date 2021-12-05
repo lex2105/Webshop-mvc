@@ -30,28 +30,27 @@ class Validator {
      * können.
      */
     private array $errorMessages = [
-        'letters' => '%s darf nur Buchstaben und Leerzeichen beinhalten.',
-        'text' => '%s darf nur Buchstaben und Sonderzeichen beinhalten.',
-        'textnum' => '%s darf nur aus alphanumerischen Zeichen bestehen.',
-        'alphanumeric' => '%s darf nur Buchstaben, Zahlen, Binde- und Unterstriche beinhalten.',
-        'checkbox' => '%s enthält keinen gültigen Wert für eine Checkbox.',
-        'password' => '%s muss mindestens 8 Zeichen lang sein, Groß- und Kleinbuchstabe und Sonderzeichen enthalten.',
-        'email' => '%s muss eine korrekte E-Mail Adresse sein.',
-        'ccexpire' => '%s should be mm/yy',
+        'letters' => '%s may only contain letters and spaces',
+        'text' => '%s can only contain letters and special characters',
+        'textnum' => '%s can only consist of alphanumeric characters',
+        'alphanumeric' => '%s  can only contain letters, numbers, hyphens and underscores',
+        'password' => '%s has to have at least 8 characters, big and small letters, as well as a special character',
+        'email' => '%s has to be a valid email address',
+        'ccexpire' => '%s has to be in mm/yy form',
 
-        'numeric' => '%s muss numerisch sein.',
-        'int' => '%s muss ganzzahlig sein.',
-        'float' => '%s muss eine Fließkommazahl sein.',
+        'numeric' => '%s must be numeric',
+        'int' => '%s must be integer',
+        'float' => '%s must be a floating number',
 
-        'equals' => '%s muss ident sein mit %s.',
-        'compare' => '%s und %s müssen ident sein.',
-        'unique' => '%s wird bereits verwendet.',
+        'equals' => '%s has to be equal to %s.',
+        'compare' => '%s and %s have to be equal',
+        'unique' => '%s is already used',
 
-        'required' => '%s ist ein Pflichtfeld.',
-        'min' => '%s muss mindestens %s sein.',
-        'min-string' => '%s muss mindestens %s Zeichen haben.',
-        'max' => '%s muss kleiner oder gleich %s sein.',
-        'max-string' => '%s darf maximal %s Zeichen haben.',
+        'required' => '%s is a mandatory field',
+        'min' => '%s must be at least %s',
+        'min-string' => '%s has to have at least %s characters',
+        'max' => '%s has to be smaller or equal to %s',
+        'max-string' => '%s can have max %s characters',
     ];
 
     /**

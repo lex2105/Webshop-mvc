@@ -45,5 +45,26 @@
   display: flex;
 }
 
-@media (max-width: 1300px) {
+@media (max-width: 1200px) {
+  .main__registrierung-form__input {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .input {
+    width: 100%;
+  }
+}
+
+@media (max-width: 960px) {
+  .main__registrierung-form {
+    padding: 40px;
+    width: 100%;
+  }
+
+  @media (max-width: 460px) {
+    .main__registrierung {
+      padding: 40px;
+    }
+  }
 }

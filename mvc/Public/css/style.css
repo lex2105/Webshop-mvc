@@ -65,12 +65,27 @@ p {
   padding: 14px 80px;
 }
 
+.header__one__search {
+  width: 300px;
+}
+
+.header__one__search form {
+  display: flex;
+  justify-content: space-between;
+}
+
 .search {
-  width: 600px;
+  width: 100%;
   border: 1px solid #535353;
   color: #535353;
   font-size: 16px;
   padding: 5px;
+  border-radius: 5px;
+}
+
+.search-bttn {
+  background: none;
+  border: none;
 }
 
 .header__one__right {
@@ -106,24 +121,85 @@ nav a:hover {
   text-decoration: underline;
 }
 
-@media (max-width: 1000px) {
+.main__nav__button {
+  appearance: none;
+  -webkit-appearance: none;
+  background: none;
+  border: 0;
+  padding: 0;
+}
+
+.sr-only {
+  position: absolute;
+  white-space: nowrap;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  border: 0;
+  padding: 0;
+  clip-path: inset(50%);
+  margin: -1px;
+}
+
+.main__nav__burger {
+  display: none;
+}
+
+@media (max-width: 1200px) {
   nav {
-    display: flex;
-    flex-direction: column;
-    margin: 0 auto;
-  }
-
-  nav a {
-    font-size: 14px;
-    margin: 3px 0;
-  }
-
-  .header__one__right a {
-    font-size: 14px;
+    padding: 14px 250px;
   }
 }
 
-@media (max-width: 650px) {
+@media (max-width: 960px) {
+  .header__one__search {
+    width: fit-content;
+  }
+  .search {
+    font-size: 14px;
+  }
+
+  nav {
+    padding: 14px 150px;
+  }
+
+  .logo {
+    font-size: 24px;
+  }
+}
+@media (max-width: 760px) {
+  .header__one {
+    padding: 14px 40px;
+  }
+  .header__one__link {
+    padding-left: 0;
+  }
+
+  .header__one__link:first-child {
+    padding-left: 20px;
+  }
+
+  .header__one__link a {
+    font-size: 14px;
+  }
+
+  nav {
+    padding: 14px 80px;
+  }
+}
+@media (max-width: 660px) {
+  nav a {
+    display: none;
+  }
+
+  nav {
+    display: flex;
+    justify-content: flex-end;
+  }
+  .main__nav__burger {
+    display: block;
+  }
+
   .header {
     flex-direction: column;
   }
@@ -196,11 +272,51 @@ nav a:hover {
   padding-top: 80px;
 }
 
+@media (max-width: 1200px) {
+  .main__product__img {
+    flex-basis: 50%;
+  }
+
+  .main__cards {
+    display: grid;
+    grid-template-columns: auto auto auto;
+  }
+}
+
+@media (max-width: 960px) {
+  .main__cards {
+    display: grid;
+    grid-template-columns: auto auto;
+  }
+}
+
+@media (max-width: 760px) {
+  .main__products-overview {
+    padding: 40px;
+  }
+  .img-window {
+    width: 150px;
+    height: 150px;
+  }
+
+  .main__cards {
+    display: grid;
+    grid-template-columns: auto auto auto;
+  }
+}
+
+@media (max-width: 660px) {
+  .main__cards {
+    display: grid;
+    grid-template-columns: auto auto;
+  }
+}
+
 /* ####################################### DETAIL PAGE ################################# */
 .main__product {
   background-image: url(../../Resources/images/ubersicht-background.jpg);
   background-repeat: no-repeat;
-  background-size: contain;
+  background-size: cover;
   padding: 80px;
   display: flex;
 }
@@ -210,7 +326,7 @@ nav a:hover {
 }
 
 .img-size {
-  height: 80%;
+  width: 50%;
 }
 
 .product-name {
@@ -245,6 +361,10 @@ nav a:hover {
   margin-bottom: 40px;
 }
 
+@media (max-width: 1200px) {
+  .main__product__img {
+  }
+}
 /* ####################################### FOOTER ################################# */
 .footer__newsletter {
   padding: 30px 80px;
@@ -351,15 +471,6 @@ nav a:hover {
   margin-bottom: 0 !important;
 }
 
-@media (max-width: 1200px) {
-  .main__product__img {
-    flex-basis: 50%;
-  }
-}
-
-@media (max-width: 460px) {
-}
-
 /* Stella */
 
 @media (max-width: 1000px) {
@@ -374,27 +485,25 @@ nav a:hover {
     font-size: 18px;
   }
 
-  .footer__info__links {
-    padding-left: 50px;
-    width: 120px;
-  }
-
   .social-media li {
     padding: 0;
-  }
-
-  .footer__info h3 {
-    font-size: 14px;
+    padding-top: 10px;
   }
 
   .footer__info__links {
-    padding-left: 30px;
+    padding-left: 50px;
     width: 100px;
+    margin-top: 15px;
+    margin-left: 60px;
   }
 
   .footer__info__links a {
     font-size: 12px;
     padding: 2px 0;
+  }
+
+  .footer__info h3 {
+    font-size: 14px;
   }
 }
 
@@ -410,6 +519,13 @@ nav a:hover {
   .footer__info {
     flex-direction: column;
     margin: auto;
+  }
+
+  .footer__info__links {
+    width: 120px;
+    padding-left: 0px;
+    margin-top: 15px;
+    margin-left: 60px;
   }
 
   .footer__info__text {

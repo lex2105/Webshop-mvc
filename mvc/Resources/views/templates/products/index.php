@@ -4,7 +4,7 @@
         <?php foreach ($products as $product): ?>
         <div class="card">
             <a href="<?php echo BASE_URL; ?>/products/<?php echo $product->id; ?>/showProduct">
-                <img src="<?php echo IMAGES_URL . $product->image; ?>" alt="<?php echo $product->name; ?>" width="250px" height="250px" class="img-border">
+                <img src="<?php echo IMAGES_URL . $product->image; ?>" alt="<?php echo $product->name; ?>" width="250px" height="250px" class="img-border img-window">
             </a> 
             <div class="card_name">
                 <a class="link" href="<?php echo BASE_URL; ?>/products/<?php echo $product->id; ?>/showProduct">
