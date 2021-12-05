@@ -55,11 +55,6 @@ input[type="password"] {
   cursor: pointer;
 }
 
-.forgot-pass {
-  text-decoration: underline;
-  color: #000;
-}
-
 .main__login-registrierung__cards p {
   padding: 10px 0 20px;
 }
@@ -77,4 +72,28 @@ input[type="password"] {
   cursor: pointer;
   width: 100%;
   text-decoration: none;
+}
+
+@media (max-width: 960px) {
+  .main__login-registrierung {
+    display: block;
+  }
+
+  .main__login-registrierung__cards {
+    width: 100%;
+  }
+
+  .card-bottom-margin {
+    margin-bottom: 80px;
+  }
+}
+
+@media (max-width: 460px) {
+  .main__login-registrierung {
+    padding: 40px;
+  }
+
+  .card-bottom-margin {
+    margin-bottom: 40px;
+  }
 }

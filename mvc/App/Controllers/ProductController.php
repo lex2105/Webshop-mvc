@@ -35,8 +35,9 @@ class ProductController {
         ]);
     }
 
-    public function showSearch(string $searchTerm)
+    public function showSearch()
     {
+        $searchTerm = $_POST['search'];
         $products = Product::findByNameOrDescription($searchTerm);
         View::render('products/index', [
             'category' => "All our products",

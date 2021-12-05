@@ -34,7 +34,7 @@ return [
     '/products' => [ProductController::class, 'index'],
     '/products/{id}/showProduct' => [ProductController::class, 'showProduct'],
     '/products/{category}' => [ProductController::class, 'showCategory'],
-    '/search?search={searchTerm}' => [ProductController::class, 'showSearch'],
+    '/search' => [ProductController::class, 'showSearch'],
 
     /**
      * Users Routes

@@ -1,5 +1,5 @@
 <div class="main__login-registrierung">
-        <div class="main__login-registrierung__cards">
+        <div class="main__login-registrierung__cards card-bottom-margin">
             <h2>Login</h2>
             <form class="form" action="<?php echo BASE_URL; ?>/login/do" method="post">
                 <input type="text" name="username" placeholder="Username">

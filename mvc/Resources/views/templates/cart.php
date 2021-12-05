@@ -3,7 +3,6 @@
     <h2 class="main__checkout__title">Your cart</h2>
     <table class="cart-table">
         <thead>
-            <th>#</th>
             <th>Product</th>
             <th>Quantity</th>
             <th>Price p.u.</th>
@@ -16,8 +15,6 @@
         foreach ($products as $product): ?>
 
             <tr>
-                <td><?php
-                    echo $product->id; ?></td>
                 <td>
                     <a href="<?php
                     echo BASE_URL; ?>/products/<?php
@@ -42,7 +39,7 @@
         <?php
         endforeach; ?>
         <tr>
-            <td colspan = 4><b>Total:</b></td>
+            <td colspan = 3><b>Total:</b></td>
             <td><b><?php echo $total; ?> €</b></td>
             
         </tr>

@@ -67,9 +67,6 @@
   background-color: #ffc4ac;
   border-radius: 10px;
   padding: 6px 30px;
-  margin-top: 20px;
-  display: inline-flex;
-  justify-content: center;
   cursor: pointer;
 }
 
@@ -110,8 +107,9 @@
   font-size: 18px;
   font-family: "Assistant-Bold", sans-serif;
   text-transform: uppercase;
-  align-self: center;
   cursor: pointer;
+  display: flex;
+  margin: 0 auto;
 }
 
 .thankyou-wrapper {
@@ -137,9 +135,49 @@
   text-transform: uppercase;
   text-decoration: none;
   color: #000;
-  align-self: center;
   cursor: pointer;
   display: flex;
-  width: 250px;
   margin: 0 auto;
+}
+
+@media (max-width: 740px) {
+  .checkout-form {
+    display: block;
+  }
+
+  .main__checkout__field__part {
+    width: 100%;
+    margin: 0 0 20px 0;
+  }
+
+  .cart-table {
+    width: 100%;
+    margin: 0 0 20px 0;
+  }
+}
+
+@media (max-width: 460px) {
+  .main__checkout-wrapper {
+    padding: 40px;
+  }
+  .main__checkout__input {
+    display: block;
+  }
+
+  .input {
+    width: 100%;
+  }
+
+  .checkout-bttn {
+    display: flex;
+    justify-content: center;
+  }
+
+  .thankyou-wrapper {
+    padding: 40px;
+  }
+
+  .thankyou-title {
+    margin-bottom: 40px;
+  }
 }
