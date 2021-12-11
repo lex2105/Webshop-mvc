@@ -45,6 +45,13 @@
   display: flex;
 }
 
+.admin-title {
+  font-family: "Assistant-Bold", sans-serif;
+  font-size: 26px;
+  text-transform: uppercase;
+  text-align: center;
+}
+
 @media (max-width: 1200px) {
   .main__registrierung-form__input {
     display: flex;

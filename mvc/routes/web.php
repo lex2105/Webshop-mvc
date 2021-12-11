@@ -6,9 +6,10 @@ use App\Controllers\UserController;
 use App\Controllers\ProductController;
 use App\Controllers\CartController;
 use App\Controllers\NewsletterController;
+use App\Controllers\ProfileController;
 
 return [
-    
+
     /**
      * Index Route
      */
@@ -35,6 +36,8 @@ return [
     '/products/{id}/showProduct' => [ProductController::class, 'showProduct'],
     '/products/{category}' => [ProductController::class, 'showCategory'],
     '/search' => [ProductController::class, 'showSearch'],
+    '/products/create' => [ProductController::class, 'create'],
+    '/products/create/do' => [ProductController::class, 'addProduct'],
 
     /**
      * Users Routes
@@ -49,7 +52,7 @@ return [
     '/products/{id}/add-to-cart' => [CartController::class, 'add'],
     '/products/{id}/remove-from-cart' => [CartController::class, 'remove'],
     '/products/{id}/remove-all-from-cart' => [CartController::class, 'removeAll'],
-    
+
     /**
      * Checkout Routes
      */
@@ -59,5 +62,12 @@ return [
     /**
      * Newsletter Route
      */
-    '/newsletter' => [NewsletterController::class, 'validateNewsletter']
+    '/newsletter' => [NewsletterController::class, 'validateNewsletter'],
+
+    /**
+     * Profile Route
+     */
+    '/profile' => [ProfileController::class, 'index'],
+    '/profile/update' => [ProfileController::class, 'update'],
+    '/userOrders/{id}' => [CartController::class, 'allOrders'],
 ];

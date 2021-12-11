@@ -6,7 +6,8 @@ use Core\Database;
 use Core\Models\AbstractModel;
 use Core\Traits\SoftDelete;
 
-class Product extends AbstractModel {
+class Product extends AbstractModel
+{
 
     use SoftDelete;
 
@@ -23,7 +24,55 @@ class Product extends AbstractModel {
     ) {
     }
 
-    public function save(): bool {
+    public function save(): bool
+    {
+        $database = new Database();
+
+        $tablename = self::getTablenameFromClassname();
+
+        if (!empty($this->id)) {
+            /**
+             * Query ausführen und Ergebnis direkt zurückgeben. Das kann entweder true oder false sein, je nachdem ob
+             * der Query funktioniert hat oder nicht.
+             */
+            $result = $database->query(
+                "UPDATE $tablename SET name = ?, price = ?, description = ?, category = ? WHERE id = ?",
+                [
+                    's:name' => $this->name,
+                    'd:price' => $this->price,
+                    's:description' => $this->description,
+                    's:category' => $this->category,
+                    'i:id' => $this->id
+                ]
+            );
+
+            return $result;
+        } else {
+            /**
+             * Hat das Objekt keine id, so müssen wir es neu anlegen.
+             */
+            $result = $database->query(
+                "INSERT INTO $tablename SET name = ?, price = ?, description = ?, category = ?",
+                [
+                    's:name' => $this->name,
+                    'd:price' => $this->price,
+                    's:description' => $this->description,
+                    's:category' => $this->category,
+                ]
+            );
+
+            /**
+             * Ein INSERT Query generiert eine neue id, diese müssen wir daher extra abfragen und verwenden daher die
+             * von uns geschrieben handleInsertResult()-Methode, die über das AbstractModel verfügbar ist.
+             */
+            $this->handleInsertResult($database);
+
+            /**
+             * Ergebnis zurückgeben. Das kann entweder true oder false sein, je nachdem ob der Query funktioniert hat
+             * oder nicht.
+             */
+            return $result;
+        }
     }
 
     public static function findByCategory(string $category, ?string $orderBy = null, ?string $direction = null): array
@@ -83,6 +132,4 @@ class Product extends AbstractModel {
          */
         return self::handleResult($result);
     }
-
-
 }

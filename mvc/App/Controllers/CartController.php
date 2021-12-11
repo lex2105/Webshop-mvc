@@ -59,7 +59,7 @@ class CartController
          * Redirect.
          */
         Redirector::redirect('/cart');
-    } 
+    }
 
     /**
      * Equipment in Cart entfernen (-1)
@@ -111,7 +111,7 @@ class CartController
         Redirector::redirect('/cart');
     }
 
-    public function checkout ()
+    public function checkout()
     {
         /**
          * [x] prikaz svih proizvoda koje je korisnik kupio sa ukupnom cijenom
@@ -128,7 +128,7 @@ class CartController
         View::render('checkout', ['products' => $productsInCart]);
     }
 
-    public function validateOrder ()
+    public function validateOrder()
     {
         /* 
          * [] spremanje svih podataka o narudžbi u databazu
@@ -151,7 +151,7 @@ class CartController
         }
 
 
-        if(!empty($errors)){
+        if (!empty($errors)) {
             Session::set('errors', $errors);
             Redirector::redirect('/checkout');
         }
@@ -166,24 +166,24 @@ class CartController
          */
 
         if ($order->save()) {
-            
+
             /**
              * Hat alles funktioniert und sind keine Fehler aufgetreten, leiten wir zum Login Formular.
              *
              * Um eine Erfolgsmeldung ausgeben zu können, verwenden wir dieselbe Mechanik wie für die errors.
              */
 
-        /**
-         * order_items su proizvodi u košarici
-         * 1. dohvatiti proizvode iz košarice
-         * 2. za svaki proizvod iz košarice kreirati order item
-         * 2a. svakom order_itemu dodati order_id
-         * 3. snimiti svaki order item
-         */
+            /**
+             * order_items su proizvodi u košarici
+             * 1. dohvatiti proizvode iz košarice
+             * 2. za svaki proizvod iz košarice kreirati order item
+             * 2a. svakom order_itemu dodati order_id
+             * 3. snimiti svaki order item
+             */
             $productItems = CartService::get();
             $orderItems = [];
             $saveOrderItemsSuccessfull = true;
-            foreach($productItems as $productItem){
+            foreach ($productItems as $productItem) {
                 $orderItem = new OrderItem();
                 $orderItem->order_id = $order->id;
                 $orderItem->product_id = $productItem->id;
@@ -191,19 +191,15 @@ class CartController
                 $orderItem->price = $productItem->price;
                 $saveResult = $orderItem->save();
                 $saveOrderItemsSuccessfull = $saveOrderItemsSuccessfull && $saveResult;
-                $orderItems[]=$orderItem;
+                $orderItems[] = $orderItem;
             }
 
-            if ($saveOrderItemsSuccessfull)
-            {
+            if ($saveOrderItemsSuccessfull) {
                 CartService::destroy();
-                View::render('thankyou',[]);
-            }
-            else{
-                foreach($orderItems as $orderItem)
-                {
-                    if($orderItem->id!=null)
-                    {
+                View::render('thankyou', []);
+            } else {
+                foreach ($orderItems as $orderItem) {
+                    if ($orderItem->id != null) {
                         $orderItem->delete();
                     }
                 }
@@ -221,5 +217,11 @@ class CartController
 
             Redirector::redirect('/checkout');
         }
+    }
+    public function allOrders(int $id)
+    {
+        $orders = Order::findOrdersByUser($id);
+
+        View::render('profile/userOrders', ['orders' => $orders]);
     }
 }

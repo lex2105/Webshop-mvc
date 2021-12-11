@@ -6,7 +6,8 @@ use Core\Database;
 use Core\Models\AbstractModel;
 use Core\Traits\SoftDelete;
 
-class OrderItem extends AbstractModel {
+class OrderItem extends AbstractModel
+{
 
     use SoftDelete;
 

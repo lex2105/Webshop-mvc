@@ -6,9 +6,10 @@ use Core\Database;
 use Core\Models\AbstractModel;
 use Core\Traits\SoftDelete;
 
-class Order extends AbstractModel{
+class Order extends AbstractModel
+{
 
-    use SoftDelete; 
+    use SoftDelete;
 
     public function __construct(
         public ?int $id = null,
@@ -23,13 +24,15 @@ class Order extends AbstractModel{
         public string $city = '',
         public string $state = '',
         public string $card_holder = '',
+        public string $card_type = '',
         public int $card_number = 0,
         public string $expire_date = '',
         public int $cvv = 0,
-    ){
+    ) {
     }
 
-    public function save(): bool{
+    public function save(): bool
+    {
 
         $database = new Database();
 
@@ -92,5 +95,34 @@ class Order extends AbstractModel{
              */
             return $result;
         }
+    }
+
+    public static function findOrdersByUser(?int $userId)
+    {
+        /**
+         * Datenbankverbindung herstellen.
+         */
+        $database = new Database();
+        /**
+         * Tabellennamen berechnen.
+         */
+        $tablename = self::getTablenameFromClassname();
+
+        /**
+         * Query ausführen.
+         *
+         * Beachte hier den Filter auf die polymorphe Beziehung mit foreign_table.
+         */
+        $result = $database->query(
+            "SELECT * FROM $tablename WHERE user_id = ? ORDER BY created_at ASC",
+            [
+                'i:user_id' => $userId,
+            ]
+        );
+
+        /**
+         * Datenbankergebnis verarbeiten und zurückgeben.
+         */
+        return self::handleResult($result);
     }
 }

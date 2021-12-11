@@ -7,12 +7,14 @@ use Core\Helpers\Redirector;
 use Core\Session;
 use Core\View;
 
-class UserController {
+class UserController
+{
 
     /**
      * Alle Einträge listen.
      */
-    public function index() {
+    public function index()
+    {
         /**
          * Alle Objekte über das Model aus der Datenbank laden.
          */
@@ -29,7 +31,8 @@ class UserController {
     /**
      * Einzelnes User anzeigen.
      */
-    public function show(int $id) {
+    public function show(int $id)
+    {
         /**
          * Gewünschtes User aus der DB laden.
          */
@@ -43,9 +46,9 @@ class UserController {
         ]);
     }
 
-    public function validateUser ()
+    public function validateUser()
     {
-       
+
         $validator = new Validator();
         $validator->letters($_POST['firstname'], label: 'Firstname', required: true);
         $validator->letters($_POST['lastname'], label: 'Lastname', required: true);
@@ -65,7 +68,7 @@ class UserController {
 
         $errors = $validator->getErrors();
 
-        if(!empty($errors)){
+        if (!empty($errors)) {
             Session::set('errors', $errors);
             Redirector::redirect('/sign-up');
         }
@@ -97,4 +100,9 @@ class UserController {
             Redirector::redirect('/');
         }
     }
+
+    // public function allUsers()
+    // {
+    //     return User::showAllUsers();
+    // }
 }
