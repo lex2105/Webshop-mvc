@@ -31,3 +31,6 @@
         <button type="submit" class="register-bttn">Upload</button>
     </form>
 </div>
+
+<a href="<?php echo BASE_URL . '/admin/allUsers' ?>">All Users</a>
+<a href="<?php echo BASE_URL . '/admin/allOrders' ?>">All Orders</a>

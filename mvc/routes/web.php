@@ -44,6 +44,7 @@ return [
      */
     '/users' => [UserController::class, 'index'],
     '/users/{id}/show' => [UserController::class, 'show'],
+    '/admin/allUsers' => [UserController::class, 'index'],
 
     /**
      * Cart Routes
@@ -52,6 +53,7 @@ return [
     '/products/{id}/add-to-cart' => [CartController::class, 'add'],
     '/products/{id}/remove-from-cart' => [CartController::class, 'remove'],
     '/products/{id}/remove-all-from-cart' => [CartController::class, 'removeAll'],
+    '/admin/allOrders' => [CartController::class, 'index'],
 
     /**
      * Checkout Routes

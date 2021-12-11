@@ -6,6 +6,7 @@ use App\Models\User;
 use Core\Helpers\Redirector;
 use Core\Session;
 use Core\View;
+use Core\Validator;
 
 class UserController
 {
@@ -100,9 +101,4 @@ class UserController
             Redirector::redirect('/');
         }
     }
-
-    // public function allUsers()
-    // {
-    //     return User::showAllUsers();
-    // }
 }
