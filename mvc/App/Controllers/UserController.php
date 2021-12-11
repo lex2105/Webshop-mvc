@@ -7,6 +7,7 @@ use Core\Helpers\Redirector;
 use Core\Session;
 use Core\View;
 use Core\Validator;
+use Core\Middlewares\AuthMiddleware;
 
 class UserController
 {
@@ -100,5 +101,32 @@ class UserController
 
             Redirector::redirect('/');
         }
+    }
+
+    public function delete(int $id)
+    {
+        AuthMiddleware::isAdminOrFail();
+
+        $user = User::findOrFail($id);
+
+        View::render('helpers/confirmation', [
+            'objectType' => 'User',
+            'objectTitle' => $user->username,
+            'confirmUrl' => BASE_URL . '/users/' . $user->id . '/delete/confirm',
+            'abortUrl' => BASE_URL . '/users'
+        ]);
+    }
+
+    public function deleteConfirm(int $id)
+    {
+        AuthMiddleware::isAdminOrFail();
+
+        $user = User::findOrFail($id);
+
+        $user->delete();
+
+        Session::set('success', ['User was successfully deleted!']);
+
+        Redirector::redirect('/home');
     }
 }

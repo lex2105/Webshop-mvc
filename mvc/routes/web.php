@@ -38,6 +38,9 @@ return [
     '/search' => [ProductController::class, 'showSearch'],
     '/products/create' => [ProductController::class, 'create'],
     '/products/create/do' => [ProductController::class, 'addProduct'],
+    '/products/{id}/delete' => [ProductController::class, 'delete'],
+    '/products/{id}/delete/confirm' => [ProductController::class, 'deleteConfirm'],
+
 
     /**
      * Users Routes
@@ -45,6 +48,8 @@ return [
     '/users' => [UserController::class, 'index'],
     '/users/{id}/show' => [UserController::class, 'show'],
     '/admin/allUsers' => [UserController::class, 'index'],
+    '/users/{id}/delete' => [UserController::class, 'delete'],
+    '/users/{id}/delete/confirm' => [UserController::class, 'deleteConfirm'],
 
     /**
      * Cart Routes
@@ -53,7 +58,7 @@ return [
     '/products/{id}/add-to-cart' => [CartController::class, 'add'],
     '/products/{id}/remove-from-cart' => [CartController::class, 'remove'],
     '/products/{id}/remove-all-from-cart' => [CartController::class, 'removeAll'],
-    '/admin/allOrders' => [CartController::class, 'index'],
+    '/admin/allOrders' => [CartController::class, 'allOrders'],
 
     /**
      * Checkout Routes
@@ -71,5 +76,5 @@ return [
      */
     '/profile' => [ProfileController::class, 'index'],
     '/profile/update' => [ProfileController::class, 'update'],
-    '/userOrders/{id}' => [CartController::class, 'allOrders'],
+    '/userOrders/{id}' => [CartController::class, 'allUsersOrders'],
 ];

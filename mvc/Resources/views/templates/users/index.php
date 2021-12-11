@@ -24,6 +24,6 @@
         <td>
             <p><?php echo $user->lastname ?></p>
         </td>
-        <a href="">Delete</a>
+        <a href="<?php echo BASE_URL . "/users/$user->id/delete"; ?>">Delete</a>
     </tr>
 <?php endforeach; ?>

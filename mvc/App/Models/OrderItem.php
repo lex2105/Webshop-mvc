@@ -22,7 +22,7 @@ class OrderItem extends AbstractModel
          */
         public ?int $id = null,
         public ?int $order_id = null,
-        public ?int $quantitiy = null,
+        public ?int $quantity = null,
         public ?string $price = null,
         public ?int $product_id = null,
         public string $created_at = '',
@@ -89,5 +89,32 @@ class OrderItem extends AbstractModel
              */
             return $result;
         }
+    }
+
+    public static function getOrderItems($order_id)
+    {
+        /**
+         * Datenbankverbindung herstellen.
+         */
+        $database = new Database();
+        /**
+         * Tabellennamen berechnen.
+         */
+        $tablename = self::getTablenameFromClassname();
+        /**
+         * Query ausführen.
+         *
+         * Wurde in den Funktionsparametern eine Sortierung definiert, so wenden wir sie hier an, andernfalls rufen wir
+         * alles ohne Sortierung ab.
+         */
+        if ($order_id === null) {
+            $result = $database->query("SELECT * FROM $tablename ORDER BY order_id, id");
+        } else {
+            $result = $database->query("SELECT * FROM $tablename WHERE `order_id` = $order_id ORDER BY id");
+        }
+        /**
+         * Datenbankergebnis verarbeiten und zurückgeben.
+         */
+        return self::handleResult($result);
     }
 }

@@ -8,6 +8,7 @@ use Core\Middlewares\AuthMiddleware;
 use Core\Validator;
 use Core\Session;
 use Core\Helpers\Redirector;
+use Core\Models\File;
 
 class ProductController
 {
@@ -60,6 +61,62 @@ class ProductController
         View::render('products/create');
     }
 
+    public function delete(int $id)
+    {
+        /**
+         * Prüfen, ob ein*e User*in eingeloggt ist und ob diese*r eingeloggte User*in Admin ist. Wenn nicht, geben wir
+         * einen Fehler 403 Forbidden zurück. Dazu haben wir eine Art Middleware geschrieben, damit wir nicht immer
+         * dasselbe if-Statement kopieren müssen, sondern einfach diese Funktion aufrufen können.
+         */
+        AuthMiddleware::isAdminOrFail();
+        /**
+         * Produkt, der gelöscht werden soll, aus der DB laden.
+         */
+        $product = Product::findOrFail($id);
+
+        /**
+         * View laden und relativ viele Daten übergeben. Die große Anzahl an Daten entsteht dadurch, dass der
+         * helpers/confirmation-View so dynamisch wie möglich sein soll, damit wir ihn für jede Delete Confirmation
+         * Seite verwenden können, unabhängig vom Objekt, das gelöscht werden soll. Wir übergeben daher einen Typ und
+         * einen Titel, die für den Text der Confirmation verwendet werden, und zwei URLs, eine für den
+         * Bestätigungsbutton und eine für den Abbrechen-Button.
+         */
+        View::render('helpers/confirmation', [
+            'objectType' => 'Product',
+            'objectTitle' => $product->name,
+            'confirmUrl' => BASE_URL . '/products/' . $product->id . '/delete/confirm',
+            'abortUrl' => BASE_URL . '/products'
+        ]);
+    }
+
+    public function deleteConfirm(int $id)
+    {
+        /**
+         * Prüfen, ob ein*e User*in eingeloggt ist und ob diese*r eingeloggte User*in Admin ist. Wenn nicht, geben wir
+         * einen Fehler 403 Forbidden zurück. Dazu haben wir eine Art Middleware geschrieben, damit wir nicht immer
+         * dasselbe if-Statement kopieren müssen, sondern einfach diese Funktion aufrufen können.
+         */
+        AuthMiddleware::isAdminOrFail();
+
+        /**
+         * Produkt, der gelöscht werden soll, aus DB laden.
+         */
+        $product = Product::findOrFail($id);
+        /**
+         * Produkt löschen.
+         */
+        $product->delete();
+
+        /**
+         * Erfolgsmeldung für später in die Session speichern.
+         */
+        Session::set('success', ['Product was successfully deleted!']);
+        /**
+         * Weiterleiten zur Home Seite.
+         */
+        Redirector::redirect('/home');
+    }
+
     private function validateFormData(int $id = 0): array
     {
         /**
@@ -91,6 +148,56 @@ class ProductController
         return $validator->getErrors();
     }
 
+    public function handleUploadedFiles(Product $product): ?Product
+    {
+        /**
+         * Wir erstellen zunächst einen Array an Objekten, damit wir Logik, die zu einer Datei gehört, in diesen
+         * Objekten kapseln können.
+         */
+        $files = File::createFromUploadedFiles('images');
+
+        /**
+         * Nun gehen wir alle Dateien durch ...
+         */
+        foreach ($files as $file) {
+            /**
+             * ... speichern sie in den Uploads Ordner ...
+             */
+            $storagePath = $file->putToUploadsFolder();
+            /**
+             * ... und verknüpfen sie mit dem Raum.
+             */
+            $product->addImages([$storagePath]);
+        }
+        /**
+         * Nun geben wir den aktualisierten Raum wieder zurück.
+         */
+        return $product;
+    }
+
+    private function handleDeleteFiles(Product $product): Product
+    {
+        /**
+         * Wir prüfen, ob eine der Checkboxen angehakerlt wurde.
+         */
+        if (isset($_POST['delete-images'])) {
+            /**
+             * Wenn ja, gehen wir alle Checkboxen durch ...
+             */
+            foreach ($_POST['delete-images'] as $deleteImage) {
+                /**
+                 * Lösen die Verknüpfung zum Room ...
+                 */
+                $product->removeImages([$deleteImage]);
+                /**
+                 * ... und löschen die Datei aus dem Uploads-Ordner.
+                 */
+                File::delete($deleteImage);
+            }
+        }
+
+        return $product;
+    }
 
     public function addProduct()
     {
@@ -136,6 +243,8 @@ class ProductController
          */
         $product = new Product();
         $product->fill($_POST);
+        $product = $this->handleUploadedFiles($product);
+        // $product = $this->handleDeleteFiles($product);
 
         /**
          * Schlägt die Speicherung aus irgendeinem Grund fehl ...
@@ -153,36 +262,5 @@ class ProductController
          */
         Session::set('success', ['Product successfully added']);
         Redirector::redirect('/home');
-    }
-
-    /**
-     * @todo: change here
-     */
-
-    public function handleUploadedFiles(Product $product): ?Product
-    {
-        /**
-         * Wir erstellen zunächst einen Array an Objekten, damit wir Logik, die zu einer Datei gehört, in diesen
-         * Objekten kapseln können.
-         */
-        $files = File::createFromUploadedFiles('images');
-
-        /**
-         * Nun gehen wir alle Dateien durch ...
-         */
-        foreach ($files as $file) {
-            /**
-             * ... speichern sie in den Uploads Ordner ...
-             */
-            $storagePath = $file->putToUploadsFolder();
-            /**
-             * ... und verknüpfen sie mit dem Raum.
-             */
-            $product->addImages([$storagePath]);
-        }
-        /**
-         * Nun geben wir den aktualisierten Raum wieder zurück.
-         */
-        return $product;
     }
 }

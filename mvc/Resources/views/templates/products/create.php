@@ -26,8 +26,10 @@
             <input type="text" id="name" name="price" class="input">
         </div>
 
-        <!-- <label for="image">Image</label>
-        <input type="file" id="image" name="image"> -->
+        <div class="main__registrierung-form__input">
+            <label for="image">Image</label>
+            <input type="file" id="image" name="image">
+        </div>
         <button type="submit" class="register-bttn">Upload</button>
     </form>
 </div>

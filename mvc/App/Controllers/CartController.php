@@ -218,10 +218,16 @@ class CartController
             Redirector::redirect('/checkout');
         }
     }
-    public function allOrders(int $id)
+    public function allUsersOrders(int $id)
     {
         $orders = Order::findOrdersByUser($id);
 
+        View::render('profile/userOrders', ['orders' => $orders]);
+    }
+
+    public function allOrders()
+    {
+        $orders = Order::all();
         View::render('profile/userOrders', ['orders' => $orders]);
     }
 }

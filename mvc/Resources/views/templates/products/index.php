@@ -1,19 +1,26 @@
 <main class="main__products-overview">
     <h1><?php echo $category; ?></h1>
     <div class="main__cards">
-        <?php foreach ($products as $product): ?>
-        <div class="card">
-            <a href="<?php echo BASE_URL; ?>/products/<?php echo $product->id; ?>/showProduct">
-                <img src="<?php echo IMAGES_URL . $product->image; ?>" alt="<?php echo $product->name; ?>" width="250px" height="250px" class="img-border img-window">
-            </a> 
-            <div class="card_name">
-                <a class="link" href="<?php echo BASE_URL; ?>/products/<?php echo $product->id; ?>/showProduct">
-                    <p><?php echo $product->name; ?></p>
+        <?php foreach ($products as $product) : ?>
+            <div class="card">
+                <a href="<?php echo BASE_URL; ?>/products/<?php echo $product->id; ?>/showProduct">
+                    <img src="<?php echo IMAGES_URL . $product->image; ?>" alt="<?php echo $product->name; ?>" width="250px" height="250px" class="img-border img-window">
                 </a>
-                <p><?php echo $product->price; ?> €</p>
+                <div class="card_name">
+                    <a class="link" href="<?php echo BASE_URL; ?>/products/<?php echo $product->id; ?>/showProduct">
+                        <p><?php echo $product->name; ?></p>
+                    </a>
+                    <p><?php echo $product->price; ?> €</p>
+                </div>
+                <a href="<?php echo BASE_URL . "/products/$product->id/add-to-cart"; ?>" class="basket-bttn blue">Add to cart</a>
+                <?php if (\Core\Middlewares\AuthMiddleware::isAdmin()) : ?>
+                    <a href="<?php echo BASE_URL . "/products/$product->id/delete"; ?>">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
+                            <path d="M9 19c0 .552-.448 1-1 1s-1-.448-1-1v-10c0-.552.448-1 1-1s1 .448 1 1v10zm4 0c0 .552-.448 1-1 1s-1-.448-1-1v-10c0-.552.448-1 1-1s1 .448 1 1v10zm4 0c0 .552-.448 1-1 1s-1-.448-1-1v-10c0-.552.448-1 1-1s1 .448 1 1v10zm5-17v2h-20v-2h5.711c.9 0 1.631-1.099 1.631-2h5.315c0 .901.73 2 1.631 2h5.712zm-3 4v16h-14v-16h-2v18h18v-18h-2z" />
+                        </svg>
+                    </a>
+                <?php endif; ?>
             </div>
-            <a href="<?php echo BASE_URL . "/products/$product->id/add-to-cart"; ?>" class="basket-bttn blue">Add to cart</a>
-        </div>
         <?php endforeach; ?>
-    </div>  
+    </div>
 </main>
