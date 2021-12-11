@@ -37,7 +37,7 @@
                     </tr>
                     <?php
                     foreach ($orderItems as $orderItem) : ?>
-                        <?php $product = Product::findOrFail($orderItem->product_id); ?>
+                        <?php $product = Product::findOrFail($orderItem->product_id, true); ?>
                         <tr>
                             <td></td>
                             <td>

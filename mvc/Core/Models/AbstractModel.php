@@ -32,7 +32,7 @@ abstract class AbstractModel
      *
      * @return array
      */
-    public static function all(?string $orderBy = null, ?string $direction = null): array
+    public static function all(?string $orderBy = null, ?string $direction = null, ?bool $showDeleted = false): array
     {
         /**
          * Datenbankverbindung herstellen.
@@ -49,10 +49,16 @@ abstract class AbstractModel
          * Wurde in den Funktionsparametern eine Sortierung definiert, so wenden wir sie hier an, andernfalls rufen wir
          * alles ohne Sortierung ab.
          */
+        $query = "SELECT * FROM $tablename ";
+
+        if (!$showDeleted) {
+            $query = $query . "WHERE deleted_at IS NULL ";
+        }
+
         if ($orderBy === null) {
-            $result = $database->query("SELECT * FROM $tablename");
+            $result = $database->query($query);
         } else {
-            $result = $database->query("SELECT * FROM $tablename ORDER BY $orderBy $direction");
+            $result = $database->query("$query ORDER BY $orderBy $direction");
         }
 
         /**
@@ -68,7 +74,7 @@ abstract class AbstractModel
      *
      * @return object|null
      */
-    public static function find(int $id): ?object
+    public static function find(int $id, ?bool $showDeleted = false): ?object
     {
         /**
          * Datenbankverbindung herstellen.
@@ -82,9 +88,19 @@ abstract class AbstractModel
         /**
          * Query ausführen.
          */
-        $result = $database->query("SELECT * FROM $tablename WHERE `id` = ?", [
-            'i:id' => $id
-        ]);
+
+
+        $query = "SELECT * FROM $tablename ";
+
+        if ($showDeleted) {
+            $result = $database->query("SELECT * FROM $tablename WHERE `id` = ?", [
+                'i:id' => $id
+            ]);
+        } else {
+            $result = $database->query("SELECT * FROM $tablename WHERE deleted_at IS NULL AND `id` = ?", [
+                'i:id' => $id
+            ]);
+        }
 
         /**
          * Datenbankergebnis verarbeiten und zurückgeben.
@@ -101,12 +117,12 @@ abstract class AbstractModel
      * @return object|null
      * @throws Exception
      */
-    public static function findOrFail(int $id): ?object
+    public static function findOrFail(int $id, ?bool $showDeleted = false): ?object
     {
         /**
          * find()-Methode aufrufen.
          */
-        $result = self::find($id);
+        $result = self::find($id, $showDeleted);
 
         if (empty($result)) {
             /**

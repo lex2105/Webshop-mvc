@@ -361,9 +361,40 @@ nav a:hover {
   margin-bottom: 40px;
 }
 
-@media (max-width: 1200px) {
-  .main__product__img {
-  }
+/* ####################################### USER PROFILE ################################# */
+.userProfile-background {
+  padding: 80px;
+  /* text-align: center; */
+  background-image: url("../../Resources/images/login-reg-background.jpg");
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
+.userProfile-title {
+  display: block;
+}
+
+.userProfile-cards {
+  display: flex;
+  justify-content: space-around;
+}
+
+/* ####################################### ADMIN ################################# */
+.admin-links {
+  display: flex;
+  justify-content: space-around;
+}
+
+.admin-link {
+  text-decoration: none;
+  color: #000;
+  background-color: #ffc4ac;
+  border-radius: 5px;
+  padding: 8px 30px;
+  font-size: 18px;
+  font-family: "Assistant-Regular";
+  text-transform: uppercase;
+  margin-top: 30px;
 }
 
 /* ####################################### FOOTER ################################# */

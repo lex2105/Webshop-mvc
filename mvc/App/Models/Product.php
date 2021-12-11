@@ -75,7 +75,7 @@ class Product extends AbstractModel
         }
     }
 
-    public static function findByCategory(string $category, ?string $orderBy = null, ?string $direction = null): array
+    public static function findByCategory(string $category, ?string $orderBy = null, ?string $direction = null, ?bool $showDeleted = false): array
     {
         /**
          * Datenbankverbindung herstellen.
@@ -92,10 +92,17 @@ class Product extends AbstractModel
          * Wurde in den Funktionsparametern eine Sortierung definiert, so wenden wir sie hier an, andernfalls rufen wir
          * alles ohne Sortierung ab.
          */
+
+        $query = "SELECT * FROM $tablename WHERE `category` = '$category' ";
+
+        if (!$showDeleted) {
+            $query = $query . "AND deleted_at IS NULL ";
+        }
+
         if ($orderBy === null) {
-            $result = $database->query("SELECT * FROM $tablename WHERE `category` = '$category'");
+            $result = $database->query($query);
         } else {
-            $result = $database->query("SELECT * FROM $tablename WHERE `category` = '$category' ORDER BY $orderBy $direction");
+            $result = $database->query("$query ORDER BY $orderBy $direction");
         }
 
         /**
@@ -104,7 +111,7 @@ class Product extends AbstractModel
         return self::handleResult($result);
     }
 
-    public static function findByNameOrDescription(string $search, ?string $orderBy = null, ?string $direction = null): array
+    public static function findByNameOrDescription(string $search, ?string $orderBy = null, ?string $direction = null, ?bool $showDeleted = false): array
     {
         /**
          * Datenbankverbindung herstellen.
@@ -121,10 +128,17 @@ class Product extends AbstractModel
          * Wurde in den Funktionsparametern eine Sortierung definiert, so wenden wir sie hier an, andernfalls rufen wir
          * alles ohne Sortierung ab.
          */
+
+        $query = "SELECT * FROM $tablename WHERE (`name` like '%$search%' OR `description` like '%$search%') ";
+
+        if (!$showDeleted) {
+            $query = $query . "AND deleted_at IS NULL ";
+        }
+
         if ($orderBy === null) {
-            $result = $database->query("SELECT * FROM $tablename WHERE `name` like '%$search%' OR `description` like '%$search%'");
+            $result = $database->query($query);
         } else {
-            $result = $database->query("SELECT * FROM $tablename WHERE `name` like '%$search%' OR `description` like '%$search%' ORDER BY $orderBy $direction");
+            $result = $database->query("$query ORDER BY $orderBy $direction");
         }
 
         /**

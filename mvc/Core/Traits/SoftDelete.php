@@ -50,7 +50,7 @@ trait SoftDelete
      *
      * @return array
      */
-    public static function all(?string $orderBy = null, ?string $direction = null): array
+    public static function all(?string $orderBy = null, ?string $direction = null, ?bool $showDeleted = false): array
     {
         /**
          * Datenbankverbindung herstellen.
@@ -70,18 +70,21 @@ trait SoftDelete
          * Hier nehmen wir auch Rücksicht auf die deleted_at Spalte und geben nur Einträge zurück, die nicht als
          * gelöscht markiert sind.
          */
-        if ($orderBy === null) {
-            $result = $database->query("SELECT * FROM $tablename WHERE deleted_at IS NULL");
-        } else {
-            $result = $database->query(
-                "SELECT * FROM $tablename WHERE deleted_at IS NULL ORDER BY $orderBy $direction"
-            );
+
+        $query = "SELECT * FROM $tablename ";
+
+        if (!$showDeleted) {
+            $query = $query . "WHERE deleted_at IS NULL ";
         }
 
+        if ($orderBy === null) {
+            $result = $database->query($query);
+        } else {
+            $result = $database->query("$query ORDER BY $orderBy $direction");
+        }
         /**
          * Datenbankergebnis verarbeiten und zurückgeben.
          */
         return self::handleResult($result);
     }
-
 }

@@ -1,4 +1,4 @@
-<div class="main__registrierung">
+<div class="userProfile-background">
     <form class="main__registrierung-form" action="<?php echo BASE_URL . '/products/create/do' ?>" method="post">
         <h1 class="admin-title">Add a new product</h1>
         <div class="main__registrierung-form__input">
@@ -32,7 +32,9 @@
         </div>
         <button type="submit" class="register-bttn">Upload</button>
     </form>
-</div>
 
-<a href="<?php echo BASE_URL . '/admin/allUsers' ?>">All Users</a>
-<a href="<?php echo BASE_URL . '/admin/allOrders' ?>">All Orders</a>
+    <div class="admin-links">
+        <a href="<?php echo BASE_URL . '/admin/allUsers' ?>" class="admin-link">All Users</a>
+        <a href="<?php echo BASE_URL . '/admin/allOrders' ?>" class="admin-link">All Orders</a>
+    </div>
+</div>
