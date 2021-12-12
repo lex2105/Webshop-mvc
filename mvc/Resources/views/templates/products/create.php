@@ -1,5 +1,6 @@
-<div class="userProfile-background">
-    <form class="main__registrierung-form" action="<?php echo BASE_URL . '/products/create/do' ?>" method="post">
+<div class="admin-background">
+    <h1 class="admin-title">Hello, admin!</h1>
+    <form class="main__registrierung-form center top" action="<?php echo BASE_URL . '/products/create/do' ?>" method="post">
         <h1 class="admin-title">Add a new product</h1>
         <div class="main__registrierung-form__input">
             <label for=" name">Name</label>
@@ -34,7 +35,7 @@
     </form>
 
     <div class="admin-links">
-        <a href="<?php echo BASE_URL . '/admin/allUsers' ?>" class="admin-link">All Users</a>
-        <a href="<?php echo BASE_URL . '/admin/allOrders' ?>" class="admin-link">All Orders</a>
+        <a href="<?php echo BASE_URL . '/admin/allUsers' ?>" class="admin-link">Show all Users</a>
+        <a href="<?php echo BASE_URL . '/admin/allOrders' ?>" class="admin-link">Show all Orders</a>
     </div>
 </div>

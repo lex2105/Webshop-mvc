@@ -4,7 +4,7 @@
         <p>Be the first one to know about our exclusive offers and promotions.</p>
         <form action="<?php echo BASE_URL; ?>/newsletter" method="post">
             <label for="email" hidden>Your email:</label>
-            <input type="email" name="email" id="email" class="email" placeholder="Geben Sie Ihre E-Mail Adresse ein">
+            <input type="email" name="email" id="email" class="email" placeholder="Write your email address here">
             <button type="submit" class="subscribe-bttn">Apply now</button>
         </form>
     </div>

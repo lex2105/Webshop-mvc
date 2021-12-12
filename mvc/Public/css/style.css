@@ -364,7 +364,7 @@ nav a:hover {
 /* ####################################### USER PROFILE ################################# */
 .userProfile-background {
   padding: 80px;
-  /* text-align: center; */
+  text-align: center;
   background-image: url("../../Resources/images/login-reg-background.jpg");
   background-repeat: no-repeat;
   background-size: cover;
@@ -372,6 +372,9 @@ nav a:hover {
 
 .userProfile-title {
   display: block;
+  margin-bottom: 30px;
+  font-family: "Assistant-Regular", sans-serif;
+  font-size: 30px;
 }
 
 .userProfile-cards {
@@ -379,7 +382,127 @@ nav a:hover {
   justify-content: space-around;
 }
 
+.userProfile-card {
+  background-color: #dcf4ff;
+  padding: 40px;
+  border-radius: 15px;
+  width: 35%;
+  margin-bottom: 40px;
+}
+
+.userProfile-card h3 {
+  font-family: "Assistant-Regular", sans-serif;
+  font-weight: 700;
+  font-size: 24px;
+  text-transform: uppercase;
+  text-align: center;
+}
+
+.userProfile-text {
+  font-family: "Assistant-Regular", sans-serif;
+  font-size: 16px;
+}
+
+.left-align {
+  float: left;
+}
+
+.userProfile-link {
+  background-color: #ffc4ac;
+  color: #000;
+  text-decoration: none;
+  text-transform: uppercase;
+  font-size: 16px;
+  font-family: "Assistant-Regular", sans-serif;
+  font-weight: 700;
+  border-radius: 5px;
+  padding: 8px 25px;
+  cursor: pointer;
+}
+
+.userProfile-card input[type="text"],
+.userProfile-card input[type="password"],
+.userProfile-card input[type="email"] {
+  border: 1px solid #535353;
+  border-radius: 5px;
+  background-color: #fff;
+  color: #535353;
+  padding: 5px;
+  margin: 8px 0;
+}
+
+.userProfile-card__input {
+  display: flex;
+  justify-content: space-between;
+  margin: 8px 0;
+  font-size: 16px;
+  font-family: "Assistant-Regular", sans-serif;
+}
+
+.userProfile-card__save-bttn {
+  background-color: #ffc4ac;
+  border: none;
+  border-radius: 5px;
+  padding: 6px;
+  margin: 8px 0;
+  text-transform: uppercase;
+  font-size: 16px;
+  font-family: "Assistant-Regular", sans-serif;
+  font-weight: 700;
+  cursor: pointer;
+  width: 45%;
+  display: flex;
+  justify-content: center;
+  align-self: center;
+}
+
+/*  ####################################### USERS TABLE ################################# */
+#users {
+  font-family: "Assistant-Regular", sans-serif;
+  border-collapse: collapse;
+  width: 100%;
+}
+
+#users td,
+#users th {
+  border: 1px solid #fff;
+  padding: 8px;
+}
+
+#users tr:hover {
+  background-color: #ffc4ac;
+}
+
+#users th {
+  padding-top: 12px;
+  padding-bottom: 12px;
+  text-align: center;
+  background-color: #dcf4ff;
+  color: #000;
+}
+
+.action {
+  text-decoration: none;
+  color: #000;
+  background-color: #dcf4ff;
+  padding: 5px;
+  border-radius: 5px;
+}
 /* ####################################### ADMIN ################################# */
+.admin-background {
+  padding: 80px;
+  background-image: url("../../Resources/images/login-reg-background.jpg");
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
+/* .admin-title {
+  display: block;
+  margin-bottom: 30px;
+  font-family: "Assistant-Regular", sans-serif;
+  font-size: 30px;
+} */
+
 .admin-links {
   display: flex;
   justify-content: space-around;
@@ -396,6 +519,16 @@ nav a:hover {
   text-transform: uppercase;
   margin-top: 30px;
 }
+
+.center {
+  margin: 0 auto;
+}
+
+.top {
+  margin-top: 30px;
+}
+
+/* ####################################### CONFIRMATION ################################# */
 
 /* ####################################### FOOTER ################################# */
 .footer__newsletter {
