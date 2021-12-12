@@ -21,7 +21,7 @@
                     <p><?php echo $order->id ?></p>
                 </td>
                 <td>
-                    <p><?php echo $order->price ?></p>
+                    <p><?php echo $order->price ?> €</p>
                 </td>
                 <td>
                     <p><?php echo $order->address ?> <?php echo $order->number ?>, <?php echo $order->postal_code ?> <?php echo $order->city ?>, <?php echo $order->state ?></p>
@@ -46,7 +46,7 @@
                                     <p><?php echo $product->name ?></p>
                                 </td>
                                 <td>
-                                    <p><?php echo $orderItem->price ?></p>
+                                    <p><?php echo $orderItem->price ?> €</p>
                                 </td>
                                 <td>
                                     <p><?php echo $orderItem->quantity ?></p>

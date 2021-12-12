@@ -84,6 +84,7 @@ class ProfileController
          * Kommen wir an diesen Punkt, können wir sicher sein, dass die E-Mail-Adresse und der Username noch nicht
          * verwendet werden und alle eingegebenen Daten korrekt validiert werden konnten.
          */
+        $user->username = trim($_POST['username']);
         $user->email = trim($_POST['email']);
         if (!empty($_POST['password'])) {
             $user->setPassword($_POST['password']);

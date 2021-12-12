@@ -33,19 +33,22 @@ p {
 
 .error {
   font-family: "Assistant-Regular", sans-serif;
+  font-weight: 600;
+  font-size: 20px;
   color: rgb(237, 120, 120);
   padding: 3px;
-  border: 1px solid rgb(237, 120, 120);
   border-radius: 3px;
 }
 
 .success {
   font-family: "Assistant-Regular", sans-serif;
-  font-size: 14px;
+  font-weight: 600;
+  font-size: 20px;
   color: rgb(125, 213, 98);
+  background-color: #fff;
   padding: 3px;
-  border: 1px solid rgb(125, 213, 98);
   border-radius: 3px;
+  text-align: center;
 }
 
 /* ########################################## HEADER ####################################### */
@@ -465,7 +468,7 @@ nav a:hover {
 
 #users td,
 #users th {
-  border: 1px solid #fff;
+  border: 1px solid #535353;
   padding: 8px;
 }
 
@@ -529,7 +532,58 @@ nav a:hover {
 }
 
 /* ####################################### CONFIRMATION ################################# */
+.confirmation {
+  font-family: "Assistant-Regular", sans-serif;
+  padding: 80px;
+  background-image: url("../../Resources/images/login-reg-background.jpg");
+  background-repeat: no-repeat;
+  background-size: cover;
+  display: flex;
+  justify-content: center;
+}
 
+.confirmation-card {
+  background-color: #fff;
+  border-radius: 5px;
+  width: 50%;
+  text-align: center;
+  padding: 20px 0;
+}
+.confirmation-header {
+  font-family: "Assistant-Bold", sans-serif;
+  font-size: 26px;
+  text-transform: uppercase;
+  letter-spacing: 3px;
+}
+
+.confirmation-body {
+  padding: 10px 0;
+}
+
+.confirmation-footer {
+  padding-top: 10px;
+}
+
+.delete-bttn {
+  color: #000;
+  background-color: #ffc4ac;
+  padding: 5px 20px;
+  text-decoration: none;
+  border-radius: 5px;
+  text-transform: uppercase;
+  font-weight: 600;
+}
+
+.cancel-bttn {
+  color: #000;
+  background-color: #dcf4ff;
+  padding: 5px 20px;
+  margin-left: 10px;
+  text-decoration: none;
+  border-radius: 5px;
+  text-transform: uppercase;
+  font-weight: 600;
+}
 /* ####################################### FOOTER ################################# */
 .footer__newsletter {
   padding: 30px 80px;
