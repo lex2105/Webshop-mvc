@@ -30,18 +30,16 @@
             <?php $orderItems = OrderItem::getOrderItems($order->id); ?>
             <tr>
                 <td colspan=4>
-                    <table>
-                        <tr>
-                            <td></td>
-                            <td>product name</td>
-                            <td>price</td>
-                            <td>quantity</td>
-                        </tr>
+                    <table class="product-table">
+                        <thead>
+                            <th>product name</th>
+                            <th>price</th>
+                            <th>quantity</th>
+                        </thead>
                         <?php
                         foreach ($orderItems as $orderItem) : ?>
                             <?php $product = Product::findOrFail($orderItem->product_id, true); ?>
-                            <tr>
-                                <td></td>
+                            <tr class="table-width">
                                 <td>
                                     <p><?php echo $product->name ?></p>
                                 </td>
