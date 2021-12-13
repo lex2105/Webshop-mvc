@@ -136,7 +136,7 @@ class CartService
         /**
          * Array vorbereiten.
          */
-        $product = [];
+        $products = [];
         /**
          * Alle Einträge aus dem Cart durchgehen, ...
          */

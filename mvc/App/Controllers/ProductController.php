@@ -134,9 +134,9 @@ class ProductController
              * Hier verwenden wir "named params", damit wir einzelne Funktionsparameter überspringen können.
              */
             $validator->textnum($_POST['name'], label: 'Name', required: true, max: 255);
-            $validator->textnum($_POST['description'], label: 'Description');
-            // $validator->file($_FILES['images'], label: 'Images', type: 'image');
-            $validator->int((int)$_POST['price'], label: 'Price');
+            $validator->textnum($_POST['description'], label: 'Description', required: true);
+            $validator->file($_FILES['image'], label: 'Image', type: 'image');
+            $validator->int((int)$_POST['price'], label: 'Price', required: true);
             /**
              * @todo: implement Validate Array + Contents
              */
@@ -154,48 +154,19 @@ class ProductController
          * Wir erstellen zunächst einen Array an Objekten, damit wir Logik, die zu einer Datei gehört, in diesen
          * Objekten kapseln können.
          */
-        $files = File::createFromUploadedFiles('images');
+        $file = File::createFromUploadedFile('image');
 
         /**
-         * Nun gehen wir alle Dateien durch ...
+         * ... speichern sie in den Uploads Ordner ...
          */
-        foreach ($files as $file) {
-            /**
-             * ... speichern sie in den Uploads Ordner ...
-             */
-            $storagePath = $file->putToUploadsFolder();
-            /**
-             * ... und verknüpfen sie mit dem Raum.
-             */
-            $product->addImages([$storagePath]);
-        }
+        $storagePath = $file->putToUploadsFolder();
+        /**
+         * ... und verknüpfen sie mit dem Raum.
+         */
+        $product->image = $file->name;
         /**
          * Nun geben wir den aktualisierten Raum wieder zurück.
          */
-        return $product;
-    }
-
-    private function handleDeleteFiles(Product $product): Product
-    {
-        /**
-         * Wir prüfen, ob eine der Checkboxen angehakerlt wurde.
-         */
-        if (isset($_POST['delete-images'])) {
-            /**
-             * Wenn ja, gehen wir alle Checkboxen durch ...
-             */
-            foreach ($_POST['delete-images'] as $deleteImage) {
-                /**
-                 * Lösen die Verknüpfung zum Room ...
-                 */
-                $product->removeImages([$deleteImage]);
-                /**
-                 * ... und löschen die Datei aus dem Uploads-Ordner.
-                 */
-                File::delete($deleteImage);
-            }
-        }
-
         return $product;
     }
 
@@ -243,8 +214,11 @@ class ProductController
          */
         $product = new Product();
         $product->fill($_POST);
+
         $product = $this->handleUploadedFiles($product);
-        // $product = $this->handleDeleteFiles($product);
+
+        // var_dump($product, $product->save());
+        // exit;
 
         /**
          * Schlägt die Speicherung aus irgendeinem Grund fehl ...

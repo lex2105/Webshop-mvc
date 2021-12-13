@@ -36,12 +36,13 @@ class Product extends AbstractModel
              * der Query funktioniert hat oder nicht.
              */
             $result = $database->query(
-                "UPDATE $tablename SET name = ?, price = ?, description = ?, category = ? WHERE id = ?",
+                "UPDATE $tablename SET name = ?, price = ?, description = ?, category = ?, image = ? WHERE id = ?",
                 [
                     's:name' => $this->name,
                     'd:price' => $this->price,
                     's:description' => $this->description,
                     's:category' => $this->category,
+                    's:image' => $this->image,
                     'i:id' => $this->id
                 ]
             );
@@ -52,12 +53,13 @@ class Product extends AbstractModel
              * Hat das Objekt keine id, so müssen wir es neu anlegen.
              */
             $result = $database->query(
-                "INSERT INTO $tablename SET name = ?, price = ?, description = ?, category = ?",
+                "INSERT INTO $tablename SET name = ?, price = ?, description = ?, category = ?, image = ?",
                 [
                     's:name' => $this->name,
                     'd:price' => $this->price,
                     's:description' => $this->description,
                     's:category' => $this->category,
+                    's:image' => $this->image,
                 ]
             );
 

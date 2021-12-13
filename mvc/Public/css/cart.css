@@ -3,6 +3,13 @@
   background-image: url("../../Resources/images/login-reg-background.jpg");
 }
 
+.empty {
+  font-size: 26px;
+  font-family: "Assistant-Bold", sans-serif;
+  letter-spacing: 3px;
+  text-align: center;
+}
+
 .main__checkout__title {
   font-size: 26px;
   font-family: "Bodoni-MT-Black", serif;

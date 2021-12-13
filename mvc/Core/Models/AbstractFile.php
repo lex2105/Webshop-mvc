@@ -47,6 +47,18 @@ abstract class AbstractFile
     }
 
     /**
+     * Prüfen, ob Dateien hochgeladen wurden unter einem bestimmten input Namen.
+     *
+     * @param string $keyInSuperglobal
+     *
+     * @return bool
+     */
+    public static function fileHasBeenUploaded(string $keyInSuperglobal = 'files'): bool
+    {
+        return ($_FILES[$keyInSuperglobal]['error'] !== UPLOAD_ERR_NO_FILE);
+    }
+
+    /**
      * AbstractFile Objekte aus den Daten aus der $_FILES Superglobal erstellen.
      *
      * @param string $keyInSuperglobal Name des Upload Feldes im Formular
@@ -93,6 +105,47 @@ abstract class AbstractFile
          * Leeres Array zurückgeben, wenn keine Dateien hochgeladen wurden.
          */
         return [];
+    }
+
+    /**
+     * AbstractFile Objekte aus den Daten aus der $_FILES Superglobal erstellen.
+     *
+     * @param string $keyInSuperglobal Name des Upload Feldes im Formular
+     *
+     * @return array
+     */
+    public static function createFromUploadedFile(string $keyInSuperglobal = 'file'): self|null
+    {
+        /**
+         * Wurden überhaupt Dateien hochgeladen?
+         */
+        if (self::fileHasBeenUploaded($keyInSuperglobal)) {
+            /**
+             * Daten zu einem bestimmten Upload Feld aus $_FILES holen.
+             */
+            $file = $_FILES[$keyInSuperglobal];
+
+            /**
+             * Alle Dateinamen durchgehen und über den zugehörigen $key alle Daten in ein jeweils neues AbstractFile
+             * füllen.
+             */
+            $fileObject = new File(
+                $file["name"],
+                $file['type'],
+                $file['tmp_name'],
+                $file['error'],
+                $file['size']
+            );
+
+            /**
+             * Liste der generierten File Objekte zurückgeben.
+             */
+            return $fileObject;
+        }
+        /**
+         * Leeres Array zurückgeben, wenn keine Dateien hochgeladen wurden.
+         */
+        return null;
     }
 
     /**
